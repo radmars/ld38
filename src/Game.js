@@ -3,15 +3,19 @@ var LD38 = {};
 
 LD38.Game = class {
 	constructor() {
-		this.screenHeight = 640;
-		this.screenWidth = 960;
+		this.screenHeight = 180;
+		this.screenWidth = 320;
 		this.options = {};
+
+		window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, (m,key,value) => {
+			this.options[key] = value;
+		});
 	}
 
 	start() {
 		if(
 			!me.video.init( this.screenWidth, this.screenHeight, {
-				wrapper: null,
+				wrapper: "screen",
 				scale: this.options.scale || 'auto',
 				scaleMethod: 'fit',
 			})
@@ -21,14 +25,6 @@ LD38.Game = class {
 
 		me.audio.init("m4a,ogg");
 
-		me.loader.preload(this.resources(), this.onLoad.bind(this));
-	}
-
-	resources() {
-		return [];
-	}
-
-	onLoad() {
 		// Set up our screen states
 		Object.keys(LD38.Game.States).forEach((name) => {
 			var className = name + "Screen"
@@ -44,11 +40,48 @@ LD38.Game = class {
 			}
 		});
 
+		me.loader.preload(this.resources(), this.onLoad.bind(this));
+		me.state.change(LD38.Game.States.Loading);
+	}
+
+
+
+	image(name) {
+		return {
+			name : name,
+			type : "image",
+			src  : `data/${name}.png`,
+		}
+	}
+
+	resources() {
+		return [
+			this.image("bg0"),
+			this.image("bg1"),
+			this.image("chopper"),
+			this.image("comp"),
+			this.image("ground"),
+			this.image("hoops"),
+			this.image("kaiju"),
+			this.image("man"),
+			this.image("robot"),
+			this.image("tank"),
+		];
+	}
+
+	onLoad() {
 		// Register melon entities
 		[
+			'Chopper',
+			'Hoop',
+			'Kaiju',
+			'Man',
+			'Tank',
 		].forEach((type) => {
 			me.pool.register(type, LD38[type], true);
 		});
+
+		me.state.change(LD38.Game.States.Play);
 	}
 };
 
