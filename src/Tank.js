@@ -1,12 +1,9 @@
 "use strict";
 
-LD38.Tank = me.Sprite.extend({
-	init: function(x, y, settings) {
-		this._super(me.Sprite, 'init', [x, y, {
+LD38.Tank = LD38.Note.extend({
+	init: function(x) {
+		this._super(LD38.Note, 'init', [x, 125, {
 			image: "tank",
 		}]);
-	},
-	update: function() {
-		return true;
 	},
 });

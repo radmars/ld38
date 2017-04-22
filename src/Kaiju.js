@@ -1,16 +1,16 @@
 "use strict";
 
 LD38.Kaiju = me.Sprite.extend({
-	init: function(x, y, settings) {
-		this._super(me.Sprite, 'init', [x, y, {
+	init: function(song) {
+		this._super(me.Sprite, 'init', [0, 100, {
 			image: "kaiju",
+			anchorPoint: new me.Vector2d(1, .5),
 		}]);
-		this.progress = 0;
+		this.song = song;
 	},
 
 	update: function(dt) {
-		this.progress += dt / 1000;
-		this.pos.x = ~~(this.progress*50);
+		this.pos.x = ~~(this.song.targetX);
 		return true;
 	},
 });

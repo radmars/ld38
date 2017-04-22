@@ -1,12 +1,9 @@
 "use strict";
 
-LD38.Hoop = me.Sprite.extend({
-	init: function(x, y, settings) {
-		this._super(me.Sprite, 'init', [x, y, {
+LD38.Hoop = LD38.Note.extend({
+	init: function(x) {
+		this._super(LD38.Note, 'init', [x, 75, {
 			image: "hoops",
 		}]);
-	},
-	update: function() {
-		return true;
 	},
 });
