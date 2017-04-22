@@ -5,8 +5,12 @@ LD38.Kaiju = me.Sprite.extend({
 		this._super(me.Sprite, 'init', [x, y, {
 			image: "kaiju",
 		}]);
+		this.progress = 0;
 	},
-	update: function() {
+
+	update: function(dt) {
+		this.progress += dt / 1000;
+		this.pos.x = ~~(this.pos.x + dt / 10);
 		return true;
 	},
 });

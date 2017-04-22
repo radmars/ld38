@@ -1,44 +1,33 @@
 "use strict"
 
 LD38.PlayScreen = me.ScreenObject.extend({
-	add: function(item) {
-		me.game.world.addChild(item);
-		this.entities.push(item);
+	add: function(item, container) {
+		container = container || me.game.world
+		container.addChild(item);
+		this.entities.push([container, item]);
+		return item;
 	},
 
 	onResetEvent: function() {
 		this.entities = [];
-		this.add(new LD38.BGColor());
-		this.add(new me.Sprite(0, 0, {
-			image: "bg0",
-			doubleBuffering: true,
-			anchorPoint: new me.Vector2d(0, 0),
-		}));
+		this.bg = this.add(new LD38.BGManager());
 
-		this.add(new me.Sprite(0, 0, {
-			image: "bg1",
-			doubleBuffering: true,
-			anchorPoint: new me.Vector2d(0, 0),
-		}));
+		this.kaiju = this.add(me.pool.pull('Kaiju', 80, 100));
 
-		this.add(new me.Sprite(0, 130, {
-			image: "ground",
-			doubleBuffering: true,
-			anchorPoint: new me.Vector2d(0, 0),
-		}));
-
-		// TODO: Use pool.
-		this.add(me.pool.pull('Kaiju', 80, 100));
 		this.add(me.pool.pull('Man', 130, 125));
 		this.add(me.pool.pull('Hoop', 300, 75));
 		this.add(me.pool.pull('Chopper', 230, 40));
 		this.add(me.pool.pull('Tank', 200, 125));
+
+		me.game.viewport.follow(this.kaiju, me.game.viewport.AXIS.HORIZONTAL);
+		me.game.viewport.setDeadzone(0, 0);
 	},
 
 	onDestroyEvent: function() {
 		this.entities.forEach((item) => {
-			me.game.world.removeChild(item);
+			item[0].removeChild(item[1]);
 		});
+		this.entries = [];
 		me.audio.stopTrack();
 	},
 });
