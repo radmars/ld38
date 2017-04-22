@@ -10,7 +10,7 @@ LD38.Kaiju = me.Sprite.extend({
 
 	update: function(dt) {
 		this.progress += dt / 1000;
-		this.pos.x = ~~(this.pos.x + dt / 10);
+		this.pos.x = ~~(this.progress*50);
 		return true;
 	},
 });

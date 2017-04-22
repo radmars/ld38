@@ -57,10 +57,12 @@ LD38.Game = class {
 	resources() {
 		return [
 			this.image("bg0"),
-			this.image("bg1"),
+			this.image("bg1_1"),
+			this.image("bg1_2"),
 			this.image("chopper"),
 			this.image("comp"),
 			this.image("ground"),
+			this.image("ground2"),
 			this.image("hoops"),
 			this.image("kaiju"),
 			this.image("man"),
