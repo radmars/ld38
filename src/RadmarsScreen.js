@@ -16,7 +16,7 @@ LD38.IntroScreen = me.ScreenObject.extend({
 
 	keyHandler: function (action, keyCode, edge) {
 		if(keyCode === me.input.KEY.ENTER) {
-			me.state.change(LD38.Game.State.Play);
+			me.state.change(LD38.Game.States.Play);
 		}
 	},
 
@@ -56,13 +56,13 @@ LD38.RadmarsRenderable = me.Renderable.extend({
 
 		var offset = {
 			text: {
-				y: 88
+				y: 48
 			}
 		};
 
-		this.text_mars     = new me.Sprite(cx + 17, cy + offset.text.y, {image: "intro_mars"});
-		this.text_radmars1 = new me.Sprite(cx - 25, cy + offset.text.y, {image: "intro_radmars1"});
-		this.text_radmars2 = new me.Sprite(cx - 25, cy + offset.text.y, {image: "intro_radmars2"});
+		this.text_mars     = new me.Sprite(cx + 21, cy + offset.text.y, {image: "intro_mars"});
+		this.text_radmars1 = new me.Sprite(cx - 0, cy + offset.text.y, {image: "intro_radmars1"});
+		this.text_radmars2 = new me.Sprite(cx - 0, cy + offset.text.y, {image: "intro_radmars2"});
 
 		me.input.bindKey( me.input.KEY.ENTER, "enter", true );
 	},
