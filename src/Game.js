@@ -129,6 +129,16 @@ LD38.Game = class {
 			this.image("man"),
 			this.image("robot"),
 			this.image("tank"),
+
+			this.audio('radmarslogo'),
+			this.image('intro_bg'),
+			this.image('intro_glasses1'),
+			this.image('intro_glasses2'),
+			this.image('intro_glasses3'),
+			this.image('intro_glasses4'),
+			this.image('intro_mars'),
+			this.image('intro_radmars1'),
+			this.image('intro_radmars2'),
 		];
 	}
 
@@ -145,7 +155,7 @@ LD38.Game = class {
 			me.pool.register(type, LD38[type], true);
 		});
 
-		me.state.change(LD38.Game.States.Play);
+		me.state.change(LD38.Game.States.Intro);
 	}
 };
 
