@@ -30,7 +30,12 @@ LD38.PlayScreen = me.ScreenObject.extend({
 
 	onDestroyEvent: function() {
 		this.entities.forEach((item) => {
-			item.ancestor.removeChild(item);
+			if(item.ancestor) {
+				item.ancestor.removeChild(item);
+			}
+			else {
+				me.game.world.removeChild(item);
+			}
 		});
 		this.entries = [];
 		me.audio.stopTrack();
