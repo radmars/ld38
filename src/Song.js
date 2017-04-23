@@ -5,7 +5,7 @@
 		(x) => {return new LD38.Chopper(x)},
 		(x) => {return new LD38.Tank(x)},
 		(x) => {return new LD38.Hoop(x)},
-		(x) => {return new LD38.Tank(x)},
+		(x) => {return new LD38.Robot(x)},
 	];
 
 	LD38.Song = me.Renderable.extend({
@@ -53,22 +53,8 @@
 		}
 	});
 
-	LD38.Note = me.Sprite.extend({
-		init: function(x, y, settings) {
-			this._super(
-				me.Sprite,
-				'init',
-				[x, y, { image: settings.image }]
-			);
-			this.key = settings.key;
-		},
-
-		update: function() {
-			return true;
-		},
-	});
-
 	LD38.Song.one = () => new LD38.Song(120, (_) => {
+		_(3, 3);
 		_(4, 0);
 		_(5, 0);
 		_(6, 0);

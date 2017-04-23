@@ -2,9 +2,17 @@
 
 LD38.Chopper = LD38.Note.extend({
 	init: function(x) {
-		this._super(LD38.Note, 'init', [x, 40, {
-			image: "chopper",
+		this._super(LD38.Note, 'init', [{
+			x: x,
+			y: 40,
 			key: "up",
+			sprite: {
+				image: "chopper",
+				framewidth: 48,
+				frameheight: 48,
+			},
 		}]);
+		this.addAnimation('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8]);
+		this.setCurrentAnimation('idle');
 	},
 });

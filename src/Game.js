@@ -130,6 +130,7 @@ LD38.Game = class {
 			'Kaiju',
 			'Man',
 			'Tank',
+			'Robot',
 		].forEach((type) => {
 			me.pool.register(type, LD38[type], true);
 		});
