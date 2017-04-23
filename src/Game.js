@@ -23,7 +23,7 @@ LD38.Game = class {
 			alert("This game is too cool for your browser, try a different one!");
 		}
 
-		me.audio.init("m4a,ogg");
+		me.audio.init("ogg,mp3");
 
 		if(this.options.mute) {
 			me.audio.muteAll();
@@ -105,8 +105,18 @@ LD38.Game = class {
 		}
 	}
 
+	audio(name) {
+		return {
+			name: name,
+			type: "audio",
+			src: "data/audio/",
+			channels: 2,
+		};
+	}
+
 	resources() {
 		return [
+			this.audio("drumtest"),
 			this.image("bg0"),
 			this.image("bg1_1"),
 			this.image("bg1_2"),
