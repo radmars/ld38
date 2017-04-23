@@ -3,7 +3,7 @@
 LD38.Song.drumtest = () => new LD38.Song({
 	bpm     : 115,
 	delay   : 1500,
-	duration: 4000,
+	duration: 40000,
 	file    : "drumtest",
 	next    : 'level1',
 	spacing : 15,

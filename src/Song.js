@@ -51,6 +51,10 @@
 			this.tickList = Object.keys(this.ticks).sort(
 				(a, b) => a.tick - b.tick
 			);
+
+			if(game.options.ff) {
+				this.progress = this.delay + game.options.ff * this.msPerTick
+			}
 		},
 
 		getNext: function() {
@@ -77,6 +81,12 @@
 			if(!this.started && this.progress > this.delay) {
 				this.started = true;
 				me.audio.playTrack(this.file)
+				if(game.options.ff) {
+					me.audio.seek(
+						this.file,
+						game.options.ff * this.msPerTick / 1000
+					);
+				}
 			}
 
 			if(this.progress > this.duration) {
