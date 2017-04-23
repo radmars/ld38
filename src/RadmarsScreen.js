@@ -3,6 +3,7 @@
 LD38.IntroScreen = me.ScreenObject.extend({
 	init: function() {
 		this._super(me.ScreenObject, 'init', []);
+		this.finished = false;
 	},
 
 	onResetEvent: function() {
@@ -15,8 +16,10 @@ LD38.IntroScreen = me.ScreenObject.extend({
 	},
 
 	keyHandler: function (action, keyCode, edge) {
-		if(keyCode === me.input.KEY.ENTER) {
+		if(keyCode === me.input.KEY.ENTER && !this.finished) {
 			me.state.change(LD38.Game.States.Play);
+			me.audio.fade("radmarslogo", 1.0, 0.0, 1000);
+			this.finished = true;
 		}
 	},
 
@@ -97,7 +100,7 @@ LD38.RadmarsRenderable = me.Renderable.extend({
 		if ( this.counter < 350 ) {
 			this.counter++;
 		}
-		else{
+		else if(!me.state.current().finished) {
 			me.state.change(LD38.Game.States.Play);
 		}
 		return true;

@@ -22,6 +22,8 @@
 			var bpm     = settings.bpm;
 
 			this.file      = settings.file;
+			this.next      = settings.next;
+			this.duration  = settings.duration;
 			this.progress  = 0;
 			this.floating  = true;
 			this.msPerTick = 60 / (4 * bpm) * 1000;
@@ -49,6 +51,18 @@
 			if(!this.started && this.progress > this.delay) {
 				this.started = true;
 				me.audio.playTrack(this.file)
+			}
+
+			if(this.progress > this.duration) {
+				if(!this.finished) {
+					me.audio.fade(this.file, 1, 0, 1000);
+					me.game.viewport.fadeIn('#000', 1000, () => {
+						me.state.current().reset();
+						me.game.viewport.fadeOut('#000', 500);
+					});
+					this.finished = true;
+				}
+				return;
 			}
 
 			this.progress += dt
@@ -81,10 +95,23 @@
 		}
 	});
 
-	LD38.Song.one = () => new LD38.Song({
+	LD38.Song.level1 = () => new LD38.Song({
 		bpm     : 115,
 		delay   : 1500,
+		duration: 4000,
+		file    : "ld38-level1",
+		next    : 'drumtest',
+		spacing : 15,
+		notes   : {
+		},
+	});
+
+	LD38.Song.drumtest = () => new LD38.Song({
+		bpm     : 115,
+		delay   : 1500,
+		duration: 4000,
 		file    : "drumtest",
+		next    : 'level1',
 		spacing : 15,
 		notes   : {
 			0  : 0,

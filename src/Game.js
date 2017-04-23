@@ -117,6 +117,7 @@ LD38.Game = class {
 	resources() {
 		return [
 			this.audio("drumtest"),
+			this.audio("ld38-level1"),
 			this.image("bg0"),
 			this.image("bg1_1"),
 			this.image("bg1_2"),
@@ -155,6 +156,7 @@ LD38.Game = class {
 			me.pool.register(type, LD38[type], true);
 		});
 
+		me.state.transition('fade', '#000', 1000);
 		me.state.change(LD38.Game.States.Intro);
 	}
 };

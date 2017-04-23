@@ -2,7 +2,8 @@
 
 LD38.Note = me.Sprite.extend({
 	init: function(settings) {
-		settings.sprite.anchorPoint = new me.Vector2d(1, .5);
+		settings.sprite.anchorPoint = settings.sprite.anchorPoint
+			|| new me.Vector2d(1, .5);
 		this._super(me.Sprite, 'init', [settings.x, settings.y, settings.sprite]);
 		this.key = settings.key;
 		this.slackTime = 150;
