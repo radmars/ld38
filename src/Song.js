@@ -43,7 +43,7 @@
 				this.delay + tick * this.msPerTick < this.duration;
 				tick += 4
 			) {
-				if(!this.ticks[tick]) {
+				if(!(tick in this.ticks)) {
 					this.addNote(tick, 4);
 				}
 			}
@@ -62,11 +62,14 @@
 		},
 
 		addNote: function(tick, noteNum) {
-			var x    = (tick * this.pxPerTick) + (this.delay * this.pxPerMs);
-			var note = noteBuilders[noteNum](x);
-			note.setTiming(tick, (tick * this.msPerTick) + (this.delay));
+			var note;
+			if(noteNum != undefined) {
+				var x    = (tick * this.pxPerTick) + (this.delay * this.pxPerMs);
+				var note = noteBuilders[noteNum](x);
+				note.setTiming(tick, (tick * this.msPerTick) + (this.delay));
 
-			me.game.world.addChild(note);
+				me.game.world.addChild(note);
+			}
 			this.ticks[tick] = note;
 		},
 

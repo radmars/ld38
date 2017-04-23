@@ -17,6 +17,10 @@ LD38.Song.level1 = () => new LD38.Song({
 		20 : 1,
 		24 : 1,
 		28 : 1,
+		32 : null,
+		36 : null,
+		40 : null,
+		44 : null,
 
 	},
 });
