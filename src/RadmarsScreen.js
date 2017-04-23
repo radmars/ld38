@@ -12,7 +12,7 @@ LD38.IntroScreen = me.ScreenObject.extend({
 
 		this.subscription = me.event.subscribe( me.event.KEYDOWN, this.keyHandler.bind(this));
 
-		me.audio.playTrack( "radmarslogo" );
+		me.audio.play( "radmarslogo" );
 	},
 
 	keyHandler: function (action, keyCode, edge) {
@@ -35,6 +35,7 @@ LD38.RadmarsRenderable = me.Renderable.extend({
 		this._super(me.Renderable, "init", [0, 0, me.video.renderer.getWidth(), me.video.renderer.getHeight()] );
 		this.counter = 0;
 		this.floating = true;
+		this.exiting = false;
 
 		var cx = this.width / 2;
 		var cy = this.height / 2;
@@ -100,7 +101,8 @@ LD38.RadmarsRenderable = me.Renderable.extend({
 		if ( this.counter < 350 ) {
 			this.counter++;
 		}
-		else if(!me.state.current().finished) {
+		else if(!me.state.current().finished && !this.exiting) {
+			this.exiting = true;
 			me.state.change(LD38.Game.States.Play);
 		}
 		return true;
