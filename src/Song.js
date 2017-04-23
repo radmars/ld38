@@ -48,6 +48,12 @@
 				}
 			}
 
+			Object.keys(this.ticks).forEach((tick) => {
+				if(!this.ticks[tick]) {
+					delete this.ticks[tick];
+				}
+			});
+
 			this.tickList = Object.keys(this.ticks).sort(
 				(a, b) => a.tick - b.tick
 			);
