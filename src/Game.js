@@ -25,6 +25,10 @@ LD38.Game = class {
 
 		me.audio.init("m4a,ogg");
 
+		if(this.options.mute) {
+			me.audio.muteAll();
+		}
+
 		// Set up our screen states
 		Object.keys(LD38.Game.States).forEach((name) => {
 			var className = name + "Screen"
@@ -40,11 +44,58 @@ LD38.Game = class {
 			}
 		});
 
+		this.bindInput();
+
 		me.loader.preload(this.resources(), this.onLoad.bind(this));
 		me.state.change(LD38.Game.States.Loading);
 	}
 
+	bindInput() {
+		var inputs = {
+			left:  {
+				keys: [me.input.KEY.LEFT, me.input.KEY.A],
+				pad:  [me.input.GAMEPAD.BUTTONS.LEFT],
+			},
+			right: {
+				keys: [me.input.KEY.RIGHT, me.input.KEY.D],
+				pad:  [me.input.GAMEPAD.BUTTONS.RIGHT],
+			},
+			up: {
+				keys: [me.input.KEY.UP, me.input.KEY.W],
+				pad:  [me.input.GAMEPAD.BUTTONS.UP],
+			},
+			down: {
+				keys: [me.input.KEY.DOWN, me.input.KEY.S],
+				pad:  [me.input.GAMEPAD.BUTTONS.DOWN],
+			},
+			start: {
+				keys: [me.input.KEY.ENTER],
+				pad:  [me.input.GAMEPAD.BUTTONS.START],
+			},
+			select: {
+				keys: [me.input.KEY.SHIFT],
+				pad:  [me.input.GAMEPAD.BUTTONS.SELECT],
+			},
+		};
 
+		Object.keys(inputs).forEach(function(k) {
+			inputs[k].keys.forEach(function(code) {
+				me.input.bindKey(code, k, true);
+			})
+			if(me.input.GAMEPAD) {
+				inputs[k].pad.forEach(function(code) {
+					me.input.bindGamepad(
+						0,
+						{
+							type: 'buttons',
+							code: code,
+						},
+						inputs[k].keys[0]
+					);
+				});
+			}
+		});
+	}
 
 	image(name) {
 		return {

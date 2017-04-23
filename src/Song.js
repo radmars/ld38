@@ -31,7 +31,6 @@
 
 		addNote: function(tick, noteNum) {
 			var x = this.pxPerTick * tick
-			console.log("Creating note at ", x);
 			var note = notes[noteNum](x);
 			note.tick = tick;
 			me.game.world.addChild(note);
@@ -41,10 +40,29 @@
 		update: function(dt) {
 			this.progress += dt
 			this.targetX = this.progress * this.pxPerMs;
+			var inputs = ['start', 'up', 'down', 'left', 'right'];
+			inputs.forEach((key) => {
+				// TODO: input throttle
+				if(me.input.isKeyPressed(key)) {
+					if(this.notes[0].key == key) {
+						var note = this.notes.shift();
+						me.game.world.removeChild(note);
+					}
+				}
+			});
 		}
 	});
 
 	LD38.Note = me.Sprite.extend({
+		init: function(x, y, settings) {
+			this._super(
+				me.Sprite,
+				'init',
+				[x, y, { image: settings.image }]
+			);
+			this.key = settings.key;
+		},
+
 		update: function() {
 			return true;
 		},
