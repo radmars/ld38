@@ -8,6 +8,8 @@
 		(x) => {return new LD38.Robot(x)},
 	];
 
+	var inputs = ['start', 'up', 'down', 'left', 'right'];
+
 	LD38.Song = me.Renderable.extend({
 		init: function(settings) {
 			this._super(
@@ -27,6 +29,7 @@
 			this.pxPerMs   = this.pxPerTick / this.msPerTick;
 			this.notes     = [];
 			this.started   = false;
+			this.delay     = settings.delay;
 
 			Object.keys(noteMap).forEach((tick) => {
 				this.addNote(tick, noteMap[tick]);
@@ -34,29 +37,44 @@
 		},
 
 		addNote: function(tick, noteNum) {
-			tick = tick - 1;
-			var x = this.pxPerTick * tick
+			var x    = (tick * this.pxPerTick) + (this.delay * this.pxPerMs);
 			var note = noteBuilders[noteNum](x);
-			note.tick = tick;
+			note.setTiming(tick, (tick * this.msPerTick) + (this.delay));
+
 			me.game.world.addChild(note);
 			this.notes.push(note);
 		},
 
 		update: function(dt) {
-			if(!this.started) {
+			if(!this.started && this.progress > this.delay) {
 				this.started = true;
 				me.audio.playTrack(this.file)
 			}
 
 			this.progress += dt
 			this.targetX = this.progress * this.pxPerMs;
-			var inputs = ['start', 'up', 'down', 'left', 'right'];
+			var next = this.notes[0];
+			if(!next) {
+				return;
+			}
+
+			if(next.isLate(this.progress)) {
+				this.notes.shift();
+				console.log("late!");
+			}
+
 			inputs.forEach((key) => {
-				// TODO: input throttle
 				if(me.input.isKeyPressed(key)) {
-					if(this.notes[0].key == key) {
-						var note = this.notes.shift();
-						me.game.world.removeChild(note);
+					if(!next.isCorrectKey(key)) {
+						this.notes.shift();
+						console.log("Wrong key!");
+					}
+					else if(next.isEarly(this.progress)) {
+						console.log("Early!");
+					}
+					else {
+						this.notes.shift();
+						me.game.world.removeChild(next);
 					}
 				}
 			});
@@ -64,14 +82,14 @@
 	});
 
 	LD38.Song.one = () => new LD38.Song({
-		bpm: 115,
-		file: "drumtest",
-		spacing: 15,
-		notes: {
-			// ITS ONE BASED OK??
+		bpm     : 115,
+		delay   : 1500,
+		file    : "drumtest",
+		spacing : 15,
+		notes   : {
 			0  : 0,
 			4  : 0,
-			8 : 0,
+			8  : 0,
 			12 : 0,
 
 			16 : 1,
