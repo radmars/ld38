@@ -153,7 +153,11 @@ LD38.Game = class {
 		});
 
 		me.state.transition('fade', '#000', 1000);
-		me.state.change(LD38.Game.States.Intro);
+		me.state.change(
+			game.options.skipIntro
+				? LD38.Game.States.Play
+				: LD38.Game.States.Intro
+		);
 	}
 };
 
