@@ -105,8 +105,19 @@ LD38.Game = class {
 		}
 	}
 
+	audio(name) {
+		return {
+			name: name,
+			type: "audio",
+			src: "data/audio/",
+			channels: 2,
+		};
+	}
+
 	resources() {
 		return [
+			this.audio("drumtest"),
+			this.audio("ld38-level1"),
 			this.image("bg0"),
 			this.image("bg1_1"),
 			this.image("bg1_2"),
@@ -119,6 +130,16 @@ LD38.Game = class {
 			this.image("man"),
 			this.image("robot"),
 			this.image("tank"),
+
+			this.audio('radmarslogo'),
+			this.image('intro_bg'),
+			this.image('intro_glasses1'),
+			this.image('intro_glasses2'),
+			this.image('intro_glasses3'),
+			this.image('intro_glasses4'),
+			this.image('intro_mars'),
+			this.image('intro_radmars1'),
+			this.image('intro_radmars2'),
 		];
 	}
 
@@ -130,11 +151,13 @@ LD38.Game = class {
 			'Kaiju',
 			'Man',
 			'Tank',
+			'Robot',
 		].forEach((type) => {
 			me.pool.register(type, LD38[type], true);
 		});
 
-		me.state.change(LD38.Game.States.Play);
+		me.state.transition('fade', '#000', 1000);
+		me.state.change(LD38.Game.States.Intro);
 	}
 };
 

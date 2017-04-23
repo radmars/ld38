@@ -10,6 +10,7 @@ LD38.Kaiju = me.Sprite.extend({
 	},
 
 	update: function(dt) {
+		this._super(me.Sprite, 'update', [dt]);
 		this.pos.x = ~~(this.song.targetX);
 		return true;
 	},

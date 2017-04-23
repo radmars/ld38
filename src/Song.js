@@ -1,89 +1,97 @@
 "use strict";
 
 (function() {
-	var notes = [
+	var noteBuilders = [
 		(x) => {return new LD38.Chopper(x)},
 		(x) => {return new LD38.Tank(x)},
 		(x) => {return new LD38.Hoop(x)},
-		(x) => {return new LD38.Tank(x)},
+		(x) => {return new LD38.Robot(x)},
 	];
 
+	var inputs = ['start', 'up', 'down', 'left', 'right'];
+
 	LD38.Song = me.Renderable.extend({
-		init: function(bpm, noteCallback) {
+		init: function(settings) {
 			this._super(
 				me.Renderable,
 				'init',
 				[0, 0, 10, 10]
 			);
 
-			this.progress = 0;
-			this.floating = true;
-			this.msPerTick = 60 / (4 * bpm) * 1000;
-			this.pxPerMs= 80/1000;
-			this.pxPerTick = 4 * this.pxPerMs * this.msPerTick;
-			console.log(`px per tick: ${this.pxPerTick}`);
-			console.log(`ms per tick: ${this.msPerTick}`);
-			console.log(`px per ms: ${this.pxPerMs}`);
-			this.notes = [];
+			var noteMap = settings.notes;
+			var bpm     = settings.bpm;
 
-			noteCallback(this.addNote.bind(this));
+			this.file      = settings.file;
+			this.next      = settings.next;
+			this.duration  = settings.duration;
+			this.progress  = 0;
+			this.floating  = true;
+			this.msPerTick = 60 / (4 * bpm) * 1000;
+			this.pxPerTick = settings.spacing
+			this.pxPerMs   = this.pxPerTick / this.msPerTick;
+			this.notes     = [];
+			this.started   = false;
+			this.delay     = settings.delay;
+
+			Object.keys(noteMap).forEach((tick) => {
+				this.addNote(tick, noteMap[tick]);
+			});
 		},
 
 		addNote: function(tick, noteNum) {
-			var x = this.pxPerTick * tick
-			var note = notes[noteNum](x);
-			note.tick = tick;
+			var x    = (tick * this.pxPerTick) + (this.delay * this.pxPerMs);
+			var note = noteBuilders[noteNum](x);
+			note.setTiming(tick, (tick * this.msPerTick) + (this.delay));
+
 			me.game.world.addChild(note);
 			this.notes.push(note);
 		},
 
 		update: function(dt) {
+			if(!this.started && this.progress > this.delay) {
+				this.started = true;
+				me.audio.playTrack(this.file)
+			}
+
+			if(this.progress > this.duration) {
+				if(!this.finished) {
+					me.audio.fade(this.file, 1, 0, 1000);
+					me.game.viewport.fadeIn('#000', 1000, () => {
+						me.state.current().reset();
+						me.game.viewport.fadeOut('#000', 500);
+					});
+					this.finished = true;
+				}
+				return;
+			}
+
 			this.progress += dt
 			this.targetX = this.progress * this.pxPerMs;
-			var inputs = ['start', 'up', 'down', 'left', 'right'];
+			var next = this.notes[0];
+			if(!next) {
+				return;
+			}
+
+			if(next.isLate(this.progress)) {
+				this.notes.shift();
+				console.log("late!");
+			}
+
 			inputs.forEach((key) => {
-				// TODO: input throttle
 				if(me.input.isKeyPressed(key)) {
-					if(this.notes[0].key == key) {
-						var note = this.notes.shift();
-						me.game.world.removeChild(note);
+					if(!next.isCorrectKey(key)) {
+						this.notes.shift();
+						console.log("Wrong key!");
+					}
+					else if(next.isEarly(this.progress)) {
+						console.log("Early!");
+					}
+					else {
+						this.notes.shift();
+						me.game.world.removeChild(next);
 					}
 				}
 			});
 		}
-	});
-
-	LD38.Note = me.Sprite.extend({
-		init: function(x, y, settings) {
-			this._super(
-				me.Sprite,
-				'init',
-				[x, y, { image: settings.image }]
-			);
-			this.key = settings.key;
-		},
-
-		update: function() {
-			return true;
-		},
-	});
-
-	LD38.Song.one = () => new LD38.Song(120, (_) => {
-		_(4, 0);
-		_(5, 0);
-		_(6, 0);
-		_(7, 1);
-		_(8, 1);
-		_(9, 1);
-		_(10, 2);
-		_(11, 2);
-		_(12, 2);
-		_(13, 3);
-		_(14, 3);
-		_(17, 3);
-		_(18, 1);
-		_(19, 2);
-		_(20, 1);
-		_(21, 3);
 	});
 })();
