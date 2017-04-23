@@ -23,7 +23,7 @@ LD38.Game = class {
 			alert("This game is too cool for your browser, try a different one!");
 		}
 
-		me.audio.init("ogg,mp3");
+		me.audio.init("m4a,ogg");
 
 		if(this.options.mute) {
 			me.audio.muteAll();

@@ -36,7 +36,6 @@
 		addNote: function(tick, noteNum) {
 			tick = tick - 1;
 			var x = this.pxPerTick * tick
-			console.log(`${x} note on tick ${tick}`);
 			var note = noteBuilders[noteNum](x);
 			note.tick = tick;
 			me.game.world.addChild(note);
@@ -65,37 +64,37 @@
 	});
 
 	LD38.Song.one = () => new LD38.Song({
-		bpm: 120,
+		bpm: 115,
 		file: "drumtest",
 		spacing: 15,
 		notes: {
 			// ITS ONE BASED OK??
-			3  : 0,
-			7  : 0,
-			11 : 0,
-			15 : 0,
+			0  : 0,
+			4  : 0,
+			8 : 0,
+			12 : 0,
 
-			19 : 1,
-			23 : 1,
-			27 : 1,
-			31 : 1,
+			16 : 1,
+			20 : 1,
+			24 : 1,
+			28 : 1,
 
-			35 : 1,
-			39 : 1,
-			43 : 1,
-			47 : 1,
+			32 : 1,
+			36 : 1,
+			40 : 1,
+			44 : 1,
 
-			51 : 1,
-			53 : 2,
-			55 : 1,
-			59 : 1,
-			63 : 1,
+			48 : 1,
+			50 : 2,
+			52 : 1,
+			56 : 1,
+			60 : 1,
 
-			67 : 1,
-			69 : 2,
-			71 : 1,
-			75 : 1,
-			79 : 1,
+			64 : 1,
+			66 : 2,
+			68 : 1,
+			72 : 1,
+			76 : 1,
 		},
 	});
 })();
