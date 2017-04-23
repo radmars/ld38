@@ -6,6 +6,7 @@
 		(x) => {return new LD38.Tank(x)},
 		(x) => {return new LD38.Hoop(x)},
 		(x) => {return new LD38.Robot(x)},
+		(x) => {return new LD38.Man(x)},
 	];
 
 	var inputs = ['start', 'up', 'down', 'left', 'right'];
@@ -29,13 +30,35 @@
 			this.msPerTick = 60 / (4 * bpm) * 1000;
 			this.pxPerTick = settings.spacing
 			this.pxPerMs   = this.pxPerTick / this.msPerTick;
-			this.notes     = [];
+			this.ticks     = {};
 			this.started   = false;
 			this.delay     = settings.delay;
 
 			Object.keys(noteMap).forEach((tick) => {
 				this.addNote(tick, noteMap[tick]);
 			});
+
+			for(
+				var tick = 0;
+				this.delay + tick * this.msPerTick < this.duration;
+				tick += 4
+			) {
+				if(!this.ticks[tick]) {
+					this.addNote(tick, 4);
+				}
+			}
+
+			this.tickList = Object.keys(this.ticks).sort(
+				(a, b) => a.tick - b.tick
+			);
+		},
+
+		getNext: function() {
+			return this.ticks[this.tickList[0]];
+		},
+
+		removeNext: function() {
+			delete this.ticks[this.tickList.shift()];
 		},
 
 		addNote: function(tick, noteNum) {
@@ -44,7 +67,7 @@
 			note.setTiming(tick, (tick * this.msPerTick) + (this.delay));
 
 			me.game.world.addChild(note);
-			this.notes.push(note);
+			this.ticks[tick] = note;
 		},
 
 		update: function(dt) {
@@ -67,27 +90,29 @@
 
 			this.progress += dt
 			this.targetX = this.progress * this.pxPerMs;
-			var next = this.notes[0];
+
+			var next = this.getNext();
+
 			if(!next) {
 				return;
 			}
 
 			if(next.isLate(this.progress)) {
-				this.notes.shift();
+				this.removeNext();
 				console.log("late!");
 			}
 
 			inputs.forEach((key) => {
 				if(me.input.isKeyPressed(key)) {
 					if(!next.isCorrectKey(key)) {
-						this.notes.shift();
+						this.removeNext();
 						console.log("Wrong key!");
 					}
 					else if(next.isEarly(this.progress)) {
 						console.log("Early!");
 					}
 					else {
-						this.notes.shift();
+						this.removeNext();
 						me.game.world.removeChild(next);
 					}
 				}

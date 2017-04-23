@@ -69,12 +69,8 @@ LD38.Game = class {
 				pad:  [me.input.GAMEPAD.BUTTONS.DOWN],
 			},
 			start: {
-				keys: [me.input.KEY.ENTER],
-				pad:  [me.input.GAMEPAD.BUTTONS.START],
-			},
-			select: {
-				keys: [me.input.KEY.SHIFT],
-				pad:  [me.input.GAMEPAD.BUTTONS.SELECT],
+				keys: [me.input.KEY.ENTER, me.input.KEY.SHIFT],
+				pad:  [me.input.GAMEPAD.BUTTONS.DOWN],
 			},
 		};
 
