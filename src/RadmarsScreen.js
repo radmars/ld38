@@ -17,7 +17,7 @@ LD38.IntroScreen = me.ScreenObject.extend({
 
 	keyHandler: function (action, keyCode, edge) {
 		if(keyCode === me.input.KEY.ENTER && !this.finished) {
-			me.state.change(LD38.Game.States.Play);
+			me.state.change(LD38.Game.States.Title);
 			me.audio.fade("radmarslogo", 1.0, 0.0, 1000);
 			this.finished = true;
 		}
@@ -103,7 +103,7 @@ LD38.RadmarsRenderable = me.Renderable.extend({
 		}
 		else if(!me.state.current().finished && !this.exiting) {
 			this.exiting = true;
-			me.state.change(LD38.Game.States.Play);
+			me.state.change(LD38.Game.States.Title);
 		}
 		return true;
 	}

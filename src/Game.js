@@ -114,6 +114,8 @@ LD38.Game = class {
 		return [
 			this.audio("drumtest"),
 			this.audio("ld38-level1"),
+			this.image("title"),
+			this.image("hit_enter"),
 			this.image("level_1_bg"),
 			this.image("level_1_fg_1"),
 			this.image("level_1_fg_2"),
