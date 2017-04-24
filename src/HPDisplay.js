@@ -35,8 +35,8 @@ LD38.HPDisplay = me.Renderable.extend({
 		if (this.hp != hp) {
 			this.hp = hp;
 			this.dirty = 1;
-			var scaleTic = 1/(this.hpMax+1);
-			this.bar.scale( 1-scaleTic, 1);
+
+			this.bar.pos.x = 28 - Math.round(45* (1- this.hp / (this.hpMax)));
 		}
 	},
 

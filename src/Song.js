@@ -33,7 +33,7 @@
 			this.ticks     = {};
 			this.started   = false;
 			this.delay     = settings.delay;
-			this.hp        = 10;//settings.hp;
+			this.hp        = 30;//settings.hp;
 			this.alive 		= true;
 			this.deathTimer = 3000;
 
