@@ -4,10 +4,10 @@ LD38.Hoop = LD38.Note.extend({
 	init: function(x) {
 		this._super(LD38.Note, 'init', [{
 			x: x,
-			y: 75,
+			y: 90,
 			key: "right",
 			sprite: {
-				image: "hoops",
+				image: "hoop",
 			},
 		}]);
 	},

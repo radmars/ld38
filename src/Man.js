@@ -12,7 +12,8 @@ LD38.Man = LD38.Note.extend({
 				frameheight: 24,
 			},
 		}]);
-		this.addAnimation('idle', [0, 1, 2, 3, 4, 5]);
+		this.addAnimation('idle', [0, 1, 2, 3]);
+		this.addAnimation('shoot', [4, 5]);
 		this.setCurrentAnimation('idle');
 	},
 });

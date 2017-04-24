@@ -6,7 +6,7 @@ LD38.Song.drumtest = () => new LD38.Song({
 	duration: 40000,
 	file    : "drumtest",
 	next    : 'level1',
-	spacing : 15,
+	spacing : 10,
 	notes   : {
 		0  : 0,
 		4  : 0,

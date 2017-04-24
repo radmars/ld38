@@ -14,17 +14,17 @@ LD38.BGManager = me.Renderable.extend({
 		this.layers = [
 			{
 				offset: new me.Vector2d(0, 0),
-				tiles: ['bg0'],
-				speed: .1,
+				tiles: ['level_1_bg'],
+				speed: .001,
 			},
 			{
-				offset: new me.Vector2d(0, 0),
-				tiles: ['bg1_1', 'bg1_2'],
-				speed: .5,
+				offset: new me.Vector2d(0, 10),
+				tiles: ['level_1_mg'],
+				speed: .3,
 			},
 			{
-				offset: new me.Vector2d(0, 130),
-				tiles: ['ground', 'ground2'],
+				offset: new me.Vector2d(0, 118),
+				tiles: ['level_1_fg_1', 'level_1_fg_2'],
 				speed: 1,
 			}
 		];
