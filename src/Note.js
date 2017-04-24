@@ -21,6 +21,10 @@ LD38.Note = me.Sprite.extend({
 			this.icon = me.pool.pull('Icon', settings.x, "shift");
 			me.game.world.addChild(this.icon, 1000);
 		}
+
+		this.shotTimerMax = this.shotTimer = 1000;
+		this.shotType = "tank";
+		this.doesShoot = true;
 	},
 
 	draw: function(renderer) {
@@ -55,7 +59,21 @@ LD38.Note = me.Sprite.extend({
 
 	update: function(dt) {
 		this._super(me.Sprite, 'update', [dt]);
+
+		if(this.doesShoot){
+			this.shotTimer -= dt;
+			if (this.shotTimer <= 0) {
+				this.shotTimer = this.shotTimerMax;
+				this.shoot();
+			}
+		}
+
 		return true;
+	},
+
+	shoot: function() {
+		var shot = me.pool.pull('Bullet', {x:this.pos.x, y:this.pos.y, type:this.shotType});
+		me.game.world.addChild(shot);
 	},
 
 	removeIcon: function() {
@@ -65,8 +83,8 @@ LD38.Note = me.Sprite.extend({
 	},
 
 	hit: function() {
-		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, false);
-		me.game.world.addChild(explosion);
+		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, "explode_32");
+		me.game.world.addChild(explosion, 1000);
 	},
 });
 

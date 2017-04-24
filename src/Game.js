@@ -145,6 +145,13 @@ LD38.Game = class {
 			this.image("explode_big_64"),
 			this.image("explode_32"),
 
+			this.image("bullet_tank"),
+			this.image("bullet_man"),
+			this.image("bullet_chopper"),
+			this.image('bloodsplat'),
+			this.image('firesmoke'),
+
+
 			this.audio('radmarslogo'),
 			this.image('intro_bg'),
 			this.image('intro_glasses1'),
@@ -154,6 +161,7 @@ LD38.Game = class {
 			this.image('intro_mars'),
 			this.image('intro_radmars1'),
 			this.image('intro_radmars2'),
+
 		];
 	}
 
@@ -168,6 +176,7 @@ LD38.Game = class {
 			'Robot',
 			'Explosion',
 			'Icon',
+			'Bullet',
 		].forEach((type) => {
 			me.pool.register(type, LD38[type], true);
 		});

@@ -14,12 +14,13 @@ LD38.Robot = LD38.Note.extend({
 		}]);
 
 		this.addAnimation('idle', [0, 1, 2, 3]);
-		//this.addAnimation('shoot', [4, 5]);
+		this.addAnimation('shoot', [0, 1, 2, 3]);
 		this.setCurrentAnimation('idle');
+		this.doesShoot = false;
 	},
 
 	hit: function() {
-		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, true);
+		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, "explode_big_64");
 		me.game.world.addChild(explosion);
 	},
 
