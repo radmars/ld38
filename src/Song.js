@@ -61,6 +61,9 @@
 
 			if(game.options.ff) {
 				this.progress = this.delay + game.options.ff * this.msPerTick
+				while(this.tickList[0] < game.options.ff) {
+					this.removeNext();
+				}
 			}
 		},
 

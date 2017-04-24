@@ -13,4 +13,10 @@ LD38.Robot = LD38.Note.extend({
 			},
 		}]);
 	},
+
+	hit: function() {
+		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, true);
+		me.game.world.addChild(explosion);
+	},
+
 });
