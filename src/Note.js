@@ -26,14 +26,16 @@ LD38.Note = me.Sprite.extend({
 		this.doesShoot = true;
 		this.shotOffsetX = 0;
 		this.shotOffsetY = 0;
+		this.active = false;
 	},
 
 	addIcon: function() {
-		if(this.key != 'start') {
-			this.icon = me.pool.pull('Icon', this.pos.x, this.key);
-			me.game.world.addChild(this.icon);
-		}else{
-			this.icon = me.pool.pull('Icon', this.pos.x, "shift");
+		if(this.icon == null ){
+			if(this.key != 'start') {
+				this.icon = me.pool.pull('Icon', this.pos.x, this.key);
+			}else{
+				this.icon = me.pool.pull('Icon', this.pos.x, "shift");
+			}
 			me.game.world.addChild(this.icon, 1000);
 		}
 	},
@@ -93,7 +95,7 @@ LD38.Note = me.Sprite.extend({
 
 	removeIcon: function() {
 		if(this.icon) {
-			//me.game.world.removeChild(this.icon);
+			me.game.world.removeChild(this.icon);
 		}
 	},
 

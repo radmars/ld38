@@ -85,7 +85,7 @@
 				var x    = (tick * this.pxPerTick) + (this.delay * this.pxPerMs);
 				var note = noteBuilders[noteNum](x);
 				note.setTiming(tick, (tick * this.msPerTick) + (this.delay), this.pxPerMs);
-				me.game.world.addChild(note);
+				//me.game.world.addChild(note);
 				//note.addIcon();
 			}
 			this.ticks[tick] = note;
@@ -118,8 +118,19 @@
 			this.progress += dt
 			this.targetX = this.progress * this.pxPerMs;
 
-			var next = this.getNext();
+			var n;
+			for(var i=0; i<10; i++) {
+				if (this.tickList.length > i) {
+					n = this.ticks[this.tickList[i]];
+					if (!n.active) {
+						me.game.world.addChild(n);
+						n.addIcon();
+						n.active = true;
+					}
+				}
+			}
 
+			var next = this.getNext();
 			if(!next) {
 				return true;
 			}
