@@ -33,7 +33,7 @@
 			this.ticks     = {};
 			this.started   = false;
 			this.delay     = settings.delay;
-			this.hp        = 30;//settings.hp;
+			this.hp  = this.hpMax = 15;//settings.hp;
 			this.alive 		= true;
 			this.deathTimer = 3000;
 
@@ -204,6 +204,11 @@
 						next.hit();
 						this.removeNext();
 						me.game.world.removeChild(next);
+						this.hp += 0.25;
+						if(this.hp > this.hpMax){
+							this.hp = this.hpMax;
+						}
+						me.event.publish("hp change", [this.hp]);
 					}
 				}
 			});
