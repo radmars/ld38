@@ -8,8 +8,10 @@ LD38.Explosion = me.Sprite.extend({
 			framewidth: size,
 			frameheight: size,
 		}]);
-		this.addAnimation('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8]);
+		this.addAnimation('idle', [0, 1, 2, 3, 4, 5, 6, 7]);
+		this.addAnimation('dead', [7]);
 		this.setCurrentAnimation('idle', () => {
+		this.setCurrentAnimation('dead');
 			me.game.world.removeChild(this);
 		});
 	},
