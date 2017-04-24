@@ -16,11 +16,16 @@ LD38.PlayScreen = me.ScreenObject.extend({
 	onResetEvent: function() {
 		me.audio.stopTrack();
 		this.entities = [];
-		this.bg = this.add(new LD38.BGManager());
+
 		this.song = this.add(LD38.Song[this.nextSong]());
 		this.nextSong = this.song.next;
+		this.kaiju = me.pool.pull('Kaiju', this.song);
 
-		this.kaiju = this.add(me.pool.pull('Kaiju', this.song));
+		this.bg = this.add(new LD38.BGManager(this.kaiju, "level_1"));
+
+		//this.add(this.kaiju);
+		//add  kaiju to world so he sorts correctly.
+		me.game.world.addChild(this.kaiju, 16);
 
 		me.game.viewport.follow(this.kaiju.trackingPos, me.game.viewport.AXIS.HORIZONTAL);
 		me.game.viewport.setDeadzone(0, 0);

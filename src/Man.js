@@ -2,6 +2,10 @@
 
 LD38.Man = LD38.Note.extend({
 	init: function(x, y, settings) {
+
+		this.iconOffsetX = 0;
+		this.iconOffsetY = -15;
+
 		this._super(LD38.Note, 'init', [{
 			x: x,
 			y: 125,
@@ -16,8 +20,6 @@ LD38.Man = LD38.Note.extend({
 		this.addAnimation('shoot', [4,5,4,5]);
 		this.setCurrentAnimation('idle');
 		this.shotType = "man";
-		this.iconOffsetX = 0;
-		this.iconOffsetY = -15;
 	},
 
 	hit: function() {

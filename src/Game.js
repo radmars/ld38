@@ -152,6 +152,7 @@ LD38.Game = class {
 			this.image("bullet_chopper"),
 			this.image('bloodsplat'),
 			this.image('firesmoke'),
+			this.image('beat_line'),
 
 
 			this.audio('radmarslogo'),

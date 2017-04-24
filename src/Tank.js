@@ -2,6 +2,10 @@
 
 LD38.Tank = LD38.Note.extend({
 	init: function(x) {
+
+		this.iconOffsetX = 0;
+		this.iconOffsetY = -15;
+
 		this._super(LD38.Note, 'init', [{
 			x: x,
 			y: 115,
@@ -19,7 +23,11 @@ LD38.Tank = LD38.Note.extend({
 
 		this.shotOffsetX = -7;
 		this.shotOffsetY = 0;
-		this.iconOffsetX = 0;
-		this.iconOffsetY = -15;
+	},
+
+	hit: function() {
+		me.game.viewport.shake(3,300,me.game.viewport.AXIS.BOTH);
+		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y+10, "explode_32");
+		me.game.world.addChild(explosion, 1000);
 	},
 });

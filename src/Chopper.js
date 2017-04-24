@@ -2,6 +2,10 @@
 
 LD38.Chopper = LD38.Note.extend({
 	init: function(x) {
+
+		this.iconOffsetX = 0;
+		this.iconOffsetY = -20;
+
 		this._super(LD38.Note, 'init', [{
 			x: x,
 			y: 70,
@@ -19,7 +23,11 @@ LD38.Chopper = LD38.Note.extend({
 
 		this.shotOffsetX = -10;
 		this.shotOffsetY = 10;
-		this.iconOffsetX = 0;
-		this.iconOffsetY = 20;
+	},
+
+	hit: function() {
+		me.game.viewport.shake(2,250,me.game.viewport.AXIS.BOTH);
+		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, "explode_32");
+		me.game.world.addChild(explosion, 1000);
 	},
 });

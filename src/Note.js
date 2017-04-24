@@ -17,7 +17,7 @@ LD38.Note = me.Sprite.extend({
 	init: function(settings) {
 		settings.sprite.anchorPoint = settings.sprite.anchorPoint
 			|| new me.Vector2d(.5, .5);
-		this._super(me.Sprite, 'init', [settings.x, settings.y, settings.sprite]);
+		this._super(me.Sprite, 'init', [settings.x - (this.iconOffsetX || 0), settings.y, settings.sprite]);
 		this.key = settings.key;
 		this.slackTime = 150;
 
@@ -28,8 +28,6 @@ LD38.Note = me.Sprite.extend({
 		this.shotOffsetY = 0;
 		this.active = false;
 		this.iconActive = false;
-		this.iconOffsetX = 0;
-		this.iconOffsetY = 0;
 	},
 
 	addIcon: function() {

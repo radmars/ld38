@@ -122,7 +122,7 @@
 				if (this.tickList.length > i) {
 					n = this.ticks[this.tickList[i]];
 					if (!n.active) {
-						me.game.world.addChild(n);
+						me.game.world.addChild(n, 20);
 						n.active = true;
 						n.addIcon();
 						n.iconActive = true;
