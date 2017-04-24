@@ -12,6 +12,10 @@ LD38.Robot = LD38.Note.extend({
 				frameheight: 64,
 			},
 		}]);
+
+		this.addAnimation('idle', [0, 1, 2, 3]);
+		//this.addAnimation('shoot', [4, 5]);
+		this.setCurrentAnimation('idle');
 	},
 
 	hit: function() {
