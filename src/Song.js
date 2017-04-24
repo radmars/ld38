@@ -33,7 +33,9 @@
 			this.ticks     = {};
 			this.started   = false;
 			this.delay     = settings.delay;
-			this.hp        = settings.hp;
+			this.hp        = 10;//settings.hp;
+			this.alive 		= true;
+			this.deathTimer = 3000;
 
 			this.kaiju = null;
 
@@ -71,6 +73,12 @@
 
 		getNext: function() {
 			return this.ticks[this.tickList[0]];
+		},
+
+		onDie: function() {
+			// TODO: death sound effect.
+			// TODO: stop music?
+			this.kaiju.die();
 		},
 
 		removeNext: function() {
@@ -121,7 +129,16 @@
 				return true;
 			}
 
-			this.progress += dt
+			if(this.alive) {
+				this.progress += dt;
+			}else{
+				this.deathTimer -=dt;
+				if(this.deathTimer <=0){
+					//change to game over?
+					me.state.change(LD38.Game.States.GameOver);
+					return true;
+				}
+			}
 			this.targetX = this.progress * this.pxPerMs;
 
 			var n;
@@ -194,6 +211,14 @@
 		},
 
 		owie : function() {
+			if(this.hp <= 0) {
+				if( this.alive ){
+					this.alive = false;
+					this.onDie();
+				}
+				return;
+			}
+
 			this.hp--;
 			me.event.publish("hp change", [this.hp]);
 			me.audio.play("hit", false, null, 0.5);

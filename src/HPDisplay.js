@@ -8,20 +8,35 @@ LD38.HPDisplay = me.Renderable.extend({
 			me.Renderable,
 			'init',
 			[
-				0, me.video.renderer.getHeight() - size.height + 1,
+				0, 0,
 				size.width - 10, size.height - 1
 			]
 		);
 		this.floating = true;
-		this.pos.z = 20;
-		this.hp = initial_hp;
+		this.pos.z = 1000;
+		this.hp = this.hpMax = initial_hp;
 		this.HPSubscription = me.event.subscribe('hp change', (hp) => (this.updateHP(hp)));
+
+		this. back = new me.Sprite(25, 9, {
+			image: "hp_back",
+			anchorPoint: new me.Vector2d(0, 0),
+		});
+		this. bar = new me.Sprite(28, 10, {
+			image: "hp_bar",
+			anchorPoint: new me.Vector2d(0, 0),
+		});
+		this. frame = new me.Sprite(0, 0, {
+			image: "hp_frame",
+			anchorPoint: new me.Vector2d(0, 0),
+		});
 	},
 
 	updateHP: function(hp) {
 		if (this.hp != hp) {
 			this.hp = hp;
 			this.dirty = 1;
+			var scaleTic = 1/(this.hpMax+1);
+			this.bar.scale( 1-scaleTic, 1);
 		}
 	},
 
@@ -36,8 +51,16 @@ LD38.HPDisplay = me.Renderable.extend({
 		//renderer.save();
 		//renderer.setColor(LD38.black);
 		//renderer.fillRect(this.pos.x, this.pos.y, this.width, this.height);
-		this.font.draw(renderer, 'HP: ' + this.hp, this.pos.x - 1, this.pos.y);
+		//this.font.draw(renderer, 'HP: ' + this.hp, this.pos.x - 1, this.pos.y);
 		//renderer.restore();
+
+		var displayHP = this.hp;
+		if(displayHP > this.hpMax) displayHP = this.hp;
+		if(displayHP < 0) displayHP = 0;
+
+		this.back.draw(renderer);
+		this.bar.draw(renderer);
+		this.frame.draw(renderer);
 	},
 
 	update : function (dt) {

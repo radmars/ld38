@@ -17,26 +17,30 @@ LD38.Kaiju = me.Sprite.extend({
 		this.addAnimation('choopper', [18,19,20]);  //17,18,19,20,21
 		this.addAnimation('stomp', [22,23,24,25]) //22,23,24,25,26
 		this.addAnimation('headbutt', [27,28,29,30,31]) //27,28,29,30,31;
+		this.addAnimation('die', [10,4,10,4,10,4,10,4,10,4]);
+		this.addAnimation('die_idle', [10]);
 
 		this.baseY = this.pos.y;
 		this.preDunkY = this.pos.y-25;
 		this.dunkTween = null;
+		this.alive = true;
 
 		this.setCurrentAnimation('idle');
 		this.trackingPos = this.pos.clone();
 		//this.icon = me.pool.pull("Icon", 1, 90, 'box');
 		//me.game.world.addChild(this.icon);
-		var hud = new me.Sprite(120, 90, {
+		this.hud = new me.Sprite(120, 90, {
 			image: 'beat_line',
 			framewidth: 15,
 			frameheight: 180,
 		});
-		hud.floating = true;
-		me.game.world.addChild(hud, 15);
+		this.hud.floating = true;
+		me.game.world.addChild(this.hud, 15);
 	},
 
 	predunk: function() {
-		if(this.isCurrentAnimation("hit") || this.isCurrentAnimation("pre_dunk")) {
+
+		if(!this.alive || this.isCurrentAnimation("hit") || this.isCurrentAnimation("pre_dunk")) {
 			return;
 		}
 		this.setCurrentAnimation('pre_dunk');
@@ -57,6 +61,10 @@ LD38.Kaiju = me.Sprite.extend({
 	},
 
 	hit: function(type) {
+		if(!this.alive) {
+			return;
+		}
+
 		var anim = "dribble";
 
 		switch( type){
@@ -87,10 +95,21 @@ LD38.Kaiju = me.Sprite.extend({
 	},
 
 	miss: function() {
+		if(!this.alive) {
+			return;
+		}
 		this.returnToBaseY();
 		this.setCurrentAnimation('hit', () => {
 				this.setCurrentAnimation('idle');
 		});
+	},
+
+	die: function(){
+		this.returnToBaseY();
+		this.setCurrentAnimation('die', () => {
+			this.setCurrentAnimation('die_idle');
+		});
+		this.hud.pos.x = -1000;
 	},
 
 	update: function(dt) {
