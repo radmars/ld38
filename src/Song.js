@@ -69,6 +69,7 @@
 
 		removeNext: function() {
 			delete this.ticks[this.tickList.shift()];
+			console.log(`Next tick is ${this.tickList[0] || "undefined"}`);
 		},
 
 		addNote: function(tick, noteNum) {
