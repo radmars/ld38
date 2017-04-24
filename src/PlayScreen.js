@@ -22,7 +22,7 @@ LD38.PlayScreen = me.ScreenObject.extend({
 
 		this.kaiju = this.add(me.pool.pull('Kaiju', this.song));
 
-		me.game.viewport.follow(this.kaiju, me.game.viewport.AXIS.HORIZONTAL);
+		me.game.viewport.follow(this.kaiju.trackingPos, me.game.viewport.AXIS.HORIZONTAL);
 		me.game.viewport.setDeadzone(0, 0);
 		me.game.world.addChild(new LD38.HPDisplay(this.song.hp));
 	},

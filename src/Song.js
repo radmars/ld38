@@ -70,6 +70,7 @@
 
 		removeNext: function() {
 			delete this.ticks[this.tickList.shift()];
+			console.log(`Next tick is ${this.tickList[0] || "undefined"}`);
 		},
 
 		addNote: function(tick, noteNum) {
@@ -77,7 +78,7 @@
 			if(noteNum != undefined) {
 				var x    = (tick * this.pxPerTick) + (this.delay * this.pxPerMs);
 				var note = noteBuilders[noteNum](x);
-				note.setTiming(tick, (tick * this.msPerTick) + (this.delay));
+				note.setTiming(tick, (tick * this.msPerTick) + (this.delay), this.pxPerMs);
 
 				me.game.world.addChild(note);
 			}
@@ -135,6 +136,7 @@
 						console.log("Early!");
 					}
 					else {
+						next.hit();
 						this.removeNext();
 						me.game.world.removeChild(next);
 					}
