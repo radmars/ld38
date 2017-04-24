@@ -132,6 +132,7 @@
 						console.log("Early!");
 					}
 					else {
+						next.hit();
 						this.removeNext();
 						me.game.world.removeChild(next);
 					}

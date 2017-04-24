@@ -3,7 +3,7 @@
 LD38.Note = me.Sprite.extend({
 	init: function(settings) {
 		settings.sprite.anchorPoint = settings.sprite.anchorPoint
-			|| new me.Vector2d(1, .5);
+			|| new me.Vector2d(.5, .5);
 		this._super(me.Sprite, 'init', [settings.x, settings.y, settings.sprite]);
 		this.key = settings.key;
 		this.slackTime = 150;
@@ -29,6 +29,11 @@ LD38.Note = me.Sprite.extend({
 	update: function(dt) {
 		this._super(me.Sprite, 'update', [dt]);
 		return true;
+	},
+
+	hit: function() {
+		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, false);
+		me.game.world.addChild(explosion);
 	},
 });
 

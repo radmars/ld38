@@ -127,6 +127,8 @@ LD38.Game = class {
 			this.image("man"),
 			this.image("robot"),
 			this.image("tank"),
+			this.image("explode_big_64"),
+			this.image("explode_32"),
 
 			this.audio('radmarslogo'),
 			this.image('intro_bg'),
@@ -149,6 +151,7 @@ LD38.Game = class {
 			'Man',
 			'Tank',
 			'Robot',
+			'Explosion',
 		].forEach((type) => {
 			me.pool.register(type, LD38[type], true);
 		});
