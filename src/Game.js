@@ -155,6 +155,8 @@ LD38.Game = class {
 			this.image('firesmoke'),
 			this.image('beat_line'),
 
+			this.image('great'),
+			this.image('miss'),
 
 			this.audio('radmarslogo'),
 			this.image('intro_bg'),
