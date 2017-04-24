@@ -11,12 +11,14 @@ LD38.TitleScreen = me.ScreenObject.extend({
 		me.game.world.addChild( this.radmars );
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		this.subscription = me.event.subscribe( me.event.KEYDOWN, this.keyHandler.bind(this));
+		me.audio.play( "ld38-title" );
 
 	},
 
 	keyHandler: function (action, keyCode, edge) {
 		if(keyCode === me.input.KEY.ENTER && !this.finished) {
 			me.state.change(LD38.Game.States.Play);
+			me.audio.fade("ld38-title", 1.0, 0.0, 1000);
 			this.finished = true;
 		}
 	},
