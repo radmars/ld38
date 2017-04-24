@@ -16,5 +16,8 @@ LD38.Chopper = LD38.Note.extend({
 		this.addAnimation('shoot', [6, 7, 8]);
 		this.setCurrentAnimation('idle');
 		this.shotType = "chopper";
+
+		this.shotOffsetX = -10;
+		this.shotOffsetY = 10;
 	},
 });

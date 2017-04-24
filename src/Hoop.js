@@ -10,5 +10,7 @@ LD38.Hoop = LD38.Note.extend({
 				image: "hoop",
 			},
 		}]);
+
+		this.doesShoot = false;
 	},
 });

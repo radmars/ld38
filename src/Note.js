@@ -22,9 +22,11 @@ LD38.Note = me.Sprite.extend({
 			me.game.world.addChild(this.icon, 1000);
 		}
 
-		this.shotTimerMax = this.shotTimer = 1000;
+		this.shotTimerMax = this.shotTimer = 600 + Math.round(Math.random()*800);
 		this.shotType = "tank";
 		this.doesShoot = true;
+		this.shotOffsetX = 0;
+		this.shotOffsetY = 0;
 	},
 
 	draw: function(renderer) {
@@ -72,7 +74,11 @@ LD38.Note = me.Sprite.extend({
 	},
 
 	shoot: function() {
-		var shot = me.pool.pull('Bullet', {x:this.pos.x, y:this.pos.y, type:this.shotType});
+
+		this.setCurrentAnimation('shoot', () => {
+			this.setCurrentAnimation('idle');
+		});
+		var shot = me.pool.pull('Bullet', {x:this.pos.x + this.shotOffsetX, y:this.pos.y + this.shotOffsetY, type:this.shotType});
 		me.game.world.addChild(shot);
 	},
 

@@ -8,17 +8,20 @@ LD38.Bullet = me.Sprite.extend({
         switch( settings.type ){
             case "man":
                 img = "bullet_man";
-                vel = new me.Vector2d(-75,-25);
+                vel = new me.Vector2d(-95,-75);
                 break;
             case "tank":
                 img = "bullet_tank";
-                vel = new me.Vector2d(-65,-35);
+                vel = new me.Vector2d(-85,-35);
                 break;
             case "chopper":
                 img = "bullet_chopper";
-                vel = new me.Vector2d(-75,20);
+                vel = new me.Vector2d(-95,20);
                 break;
         }
+
+        vel.x += Math.random()*10;
+        vel.y += Math.random()*10;
 
         var sprite =  {
             image: img,
@@ -29,7 +32,7 @@ LD38.Bullet = me.Sprite.extend({
 
         this._super(me.Sprite, 'init', [settings.x, settings.y, sprite]);
         this.velocity = vel;
-        this.life = 500;
+        this.life = 400 + Math.random()*400;
     },
 
     draw: function(renderer) {
@@ -56,6 +59,6 @@ LD38.Bullet = me.Sprite.extend({
 
     die: function() {
         var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, "firesmoke");
-        me.game.world.addChild(explosion);
+        me.game.world.addChild(explosion, 1000);
     },
 });

@@ -13,7 +13,7 @@ LD38.Man = LD38.Note.extend({
 			},
 		}]);
 		this.addAnimation('idle', [0, 1, 2, 3]);
-		this.addAnimation('shoot', [4, 5]);
+		this.addAnimation('shoot', [4,5,4,5]);
 		this.setCurrentAnimation('idle');
 		this.shotType = "man";
 	},

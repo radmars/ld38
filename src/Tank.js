@@ -14,7 +14,10 @@ LD38.Tank = LD38.Note.extend({
 		}]);
 
 		this.addAnimation('idle', [0, 1, 2]);
-		this.addAnimation('shoot', [3, 4, 5, 6, 7]);
+		this.addAnimation('shoot', [3,3, 4, 5, 6, 7]);
 		this.setCurrentAnimation('idle');
+
+		this.shotOffsetX = -7;
+		this.shotOffsetY = 0;
 	},
 });
