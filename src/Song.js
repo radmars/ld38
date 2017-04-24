@@ -110,10 +110,16 @@
 			if(this.progress > this.duration) {
 				if(!this.finished) {
 					me.audio.fade(this.file, 1, 0, 1000);
-					me.game.viewport.fadeIn('#000', 1000, () => {
-						me.state.current().reset();
-						me.game.viewport.fadeOut('#000', 500);
-					});
+                    if(this.next) {
+                        me.game.viewport.fadeIn('#000', 1000, () => {
+                            me.state.current().reset();
+                            me.game.viewport.fadeOut('#000', 500);
+                        });
+                    }
+                    else {
+                        me.state.change(LD38.Game.States.GameOver);
+                    }
+
 					this.finished = true;
 				}
 				return true;
