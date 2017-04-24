@@ -137,9 +137,11 @@
 				this.progress += dt;
 			}else{
 				this.deathTimer -=dt;
-				if(this.deathTimer <=0){
+				if(this.deathTimer <=0 && !this.finished){
 					//change to game over?
+					me.audio.fade(this.file, 1, 0, 1000);
 					me.state.change(LD38.Game.States.GameOver);
+                    this.finished = true;
 					return true;
 				}
 			}
