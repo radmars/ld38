@@ -92,6 +92,11 @@
 			this.ticks[tick] = note;
 		},
 
+		addResult: function(id, x, y) {
+			var explosion = me.pool.pull('Explosion', x, y, id);
+			me.game.world.addChild(explosion);
+		},
+
 		update: function(dt) {
 			if(!this.started && this.progress > this.delay) {
 				this.started = true;
@@ -143,6 +148,7 @@
 			}
 
 			if(next.isLate(this.progress)) {
+				this.addResult("miss", next.icon.pos.x, next.icon.pos.y);
 				this.removeNext();
 				this.owie();
 				console.log("late!");
@@ -157,6 +163,7 @@
 				if(me.input.isKeyPressed(key)) {
 					if(!next.isCorrectKey(key) ) {
 						if(dist <= 20){
+							this.addResult("miss", next.icon.pos.x, next.icon.pos.y);
 							this.removeNext();
 							this.owie();
 						}
@@ -167,6 +174,7 @@
 						console.log("Early!");
 					}
 					else {
+						this.addResult("great", next.icon.pos.x, next.icon.pos.y);
 						next.hit();
 						this.removeNext();
 						me.game.world.removeChild(next);
