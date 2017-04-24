@@ -179,6 +179,9 @@ LD38.Game = class {
 
 			this.image('great'),
 			this.image('miss'),
+			this.image('hp_back'),
+			this.image('hp_bar'),
+			this.image('hp_frame'),
 
 			this.audio('radmarslogo'),
 			this.image('intro_bg'),
