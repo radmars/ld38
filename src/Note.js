@@ -1,5 +1,12 @@
 "use strict";
 
+LD38.Icon = me.Sprite.extend({
+	init: function(x, key) {
+		console.log(key);
+		this._super(me.Sprite, 'init', [x, 167, {image: `icon_${key}`}]);
+	},
+});
+
 LD38.Note = me.Sprite.extend({
 	init: function(settings) {
 		settings.sprite.anchorPoint = settings.sprite.anchorPoint
@@ -7,6 +14,10 @@ LD38.Note = me.Sprite.extend({
 		this._super(me.Sprite, 'init', [settings.x, settings.y, settings.sprite]);
 		this.key = settings.key;
 		this.slackTime = 150;
+		if(this.key != 'start') {
+			this.icon = me.pool.pull('Icon', settings.x, this.key);
+			me.game.world.addChild(this.icon);
+		}
 	},
 
 	draw: function(renderer) {
@@ -42,6 +53,12 @@ LD38.Note = me.Sprite.extend({
 	update: function(dt) {
 		this._super(me.Sprite, 'update', [dt]);
 		return true;
+	},
+
+	removeIcon: function() {
+		if(this.icon) {
+			me.game.world.removeChild(this.icon);
+		}
 	},
 
 	hit: function() {

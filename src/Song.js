@@ -55,8 +55,8 @@
 				}
 			});
 
-			this.tickList = Object.keys(this.ticks).sort(
-				(a, b) => a.tick - b.tick
+			this.tickList = Object.keys(this.ticks).map((x) => +x).sort(
+				(a, b) => a - b
 			);
 
 			if(game.options.ff) {
@@ -72,7 +72,9 @@
 		},
 
 		removeNext: function() {
+			var note = this.getNext();
 			delete this.ticks[this.tickList.shift()];
+			note.removeIcon();
 			console.log(`Next tick is ${this.tickList[0] || "undefined"}`);
 		},
 
@@ -109,7 +111,7 @@
 					});
 					this.finished = true;
 				}
-				return;
+				return true;
 			}
 
 			this.progress += dt
@@ -118,7 +120,7 @@
 			var next = this.getNext();
 
 			if(!next) {
-				return;
+				return true;
 			}
 
 			if(next.isLate(this.progress)) {
@@ -145,6 +147,8 @@
 					}
 				}
 			});
+
+			return true;
 		},
 
 		owie : function() {
