@@ -77,7 +77,7 @@
 			if(noteNum != undefined) {
 				var x    = (tick * this.pxPerTick) + (this.delay * this.pxPerMs);
 				var note = noteBuilders[noteNum](x);
-				note.setTiming(tick, (tick * this.msPerTick) + (this.delay));
+				note.setTiming(tick, (tick * this.msPerTick) + (this.delay), this.pxPerMs);
 
 				me.game.world.addChild(note);
 			}

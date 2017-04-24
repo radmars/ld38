@@ -15,12 +15,16 @@ LD38.Note = me.Sprite.extend({
 		if(game.options.debug) {
 			renderer.setColor(new me.Color(255, 255, 0, .5));
 			renderer.fillRect(this.pos.x - 1, this.pos.y - 20, 2, 40);
+			renderer.setColor(new me.Color(0, 255, 0, .5));
+			var off = this.slackTime * this.pxPerMs;
+			renderer.fillRect(this.pos.x - off, this.pos.y - 1, off * 2, 2);
 		}
 	},
 
-	setTiming: function(tick, perfectTime) {
+	setTiming: function(tick, perfectTime, pxPerMs) {
 		this.tick = tick;
 		this.time = perfectTime;
+		this.pxPerMs = pxPerMs
 	},
 
 	isCorrectKey: function(key) {
