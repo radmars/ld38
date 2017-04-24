@@ -1,9 +1,9 @@
 "use strict";
 
 LD38.Icon = me.Sprite.extend({
-	init: function(x, key) {
+	init: function(x, y, key) {
 		console.log(key);
-		this._super(me.Sprite, 'init', [x, 167, {image: `icon_${key}`}]);
+		this._super(me.Sprite, 'init', [x, y, {image: `icon_${key}`}]);
 	},
 
 	update: function(dt) {
@@ -27,14 +27,17 @@ LD38.Note = me.Sprite.extend({
 		this.shotOffsetX = 0;
 		this.shotOffsetY = 0;
 		this.active = false;
+		this.iconActive = false;
+		this.iconOffsetX = 0;
+		this.iconOffsetY = 0;
 	},
 
 	addIcon: function() {
 		if(this.icon == null ){
 			if(this.key != 'start') {
-				this.icon = me.pool.pull('Icon', this.pos.x, this.key);
+				this.icon = me.pool.pull('Icon', this.pos.x + this.iconOffsetX, this.pos.y + this.iconOffsetY, this.key);
 			}else{
-				this.icon = me.pool.pull('Icon', this.pos.x, "shift");
+				this.icon = me.pool.pull('Icon', this.pos.x + this.iconOffsetX, this.pos.y +  + this.iconOffsetY, "shift");
 			}
 			me.game.world.addChild(this.icon, 1000);
 		}

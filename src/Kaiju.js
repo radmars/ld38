@@ -13,7 +13,7 @@ LD38.Kaiju = me.Sprite.extend({
 		this.addAnimation('dribble', [5,6,7,8,9]);
 		this.setCurrentAnimation('dribble');
 		this.trackingPos = this.pos.clone();
-		this.icon = me.pool.pull("Icon", 1, 'box');
+		this.icon = me.pool.pull("Icon", 1, 167, 'box');
 		me.game.world.addChild(this.icon);
 		var hud = new me.Sprite(160, 167, {
 			image: 'bottom_hud_bg',

@@ -19,5 +19,7 @@ LD38.Tank = LD38.Note.extend({
 
 		this.shotOffsetX = -7;
 		this.shotOffsetY = 0;
+		this.iconOffsetX = 0;
+		this.iconOffsetY = -15;
 	},
 });

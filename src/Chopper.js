@@ -19,5 +19,7 @@ LD38.Chopper = LD38.Note.extend({
 
 		this.shotOffsetX = -10;
 		this.shotOffsetY = 10;
+		this.iconOffsetX = 0;
+		this.iconOffsetY = 20;
 	},
 });

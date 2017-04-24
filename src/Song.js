@@ -85,8 +85,7 @@
 				var x    = (tick * this.pxPerTick) + (this.delay * this.pxPerMs);
 				var note = noteBuilders[noteNum](x);
 				note.setTiming(tick, (tick * this.msPerTick) + (this.delay), this.pxPerMs);
-				//me.game.world.addChild(note);
-				//note.addIcon();
+				//add them later..
 			}
 			this.ticks[tick] = note;
 		},
@@ -124,8 +123,9 @@
 					n = this.ticks[this.tickList[i]];
 					if (!n.active) {
 						me.game.world.addChild(n);
-						n.addIcon();
 						n.active = true;
+						n.addIcon();
+						n.iconActive = true;
 					}
 				}
 			}
@@ -133,6 +133,11 @@
 			var next = this.getNext();
 			if(!next) {
 				return true;
+			}else{
+				if(!next.iconActive) {
+					next.addIcon();
+					next.iconActive = true;
+				}
 			}
 
 			if(next.isLate(this.progress)) {
