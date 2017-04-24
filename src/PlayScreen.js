@@ -20,6 +20,7 @@ LD38.PlayScreen = me.ScreenObject.extend({
 		this.song = this.add(LD38.Song[this.nextSong]());
 		this.nextSong = this.song.next;
 		this.kaiju = me.pool.pull('Kaiju', this.song);
+		this.song.kaiju = this.kaiju;
 
 		this.bg = this.add(new LD38.BGManager(this.kaiju, "level_1"));
 

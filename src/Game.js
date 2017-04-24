@@ -69,7 +69,7 @@ LD38.Game = class {
 				pad:  [me.input.GAMEPAD.BUTTONS.DOWN],
 			},
 			start: {
-				keys: [me.input.KEY.ENTER, me.input.KEY.SHIFT],
+				keys: [me.input.KEY.ENTER, me.input.KEY.X],
 				pad:  [me.input.GAMEPAD.BUTTONS.DOWN],
 			},
 		};
@@ -126,6 +126,7 @@ LD38.Game = class {
 			this.image("icon_right"),
 			this.image("icon_left"),
 			this.image("icon_shift"),
+			this.image("icon_x"),
 			this.image("bottom_hud_bg"),
 			this.image("level_1_bg"),
 			this.image("level_1_fg_1"),

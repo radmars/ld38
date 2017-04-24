@@ -35,6 +35,8 @@
 			this.delay     = settings.delay;
 			this.hp        = settings.hp;
 
+			this.kaiju = null;
+
 			Object.keys(noteMap).forEach((tick) => {
 				this.addNote(tick, noteMap[tick]);
 			});
@@ -146,11 +148,18 @@
 				console.log("late!");
 			}
 
+			var dist = 0;
+			if(this.kaiju != null){
+				dist = Math.abs(( this.kaiju.pos.x - next.pos.x));
+			}
+
 			inputs.forEach((key) => {
 				if(me.input.isKeyPressed(key)) {
-					if(!next.isCorrectKey(key)) {
-						this.removeNext();
-						this.owie();
+					if(!next.isCorrectKey(key) ) {
+						if(dist <= 20){
+							this.removeNext();
+							this.owie();
+						}
 						console.log("Wrong key!");
 					}
 					else if(next.isEarly(this.progress)) {
