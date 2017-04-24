@@ -6,7 +6,7 @@ LD38.Song.level1 = () => new LD38.Song({
 	delay   : 1500,
 	duration: 233000,
 	file    : "ld38-level1",
-	next    : 'drumtest',
+	next    : 'level2',
 	spacing : 15,
 	notes   : {
 		

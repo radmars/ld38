@@ -25,7 +25,6 @@ LD38.Particle = me.Sprite.extend({
         this.life -=dt;
         if(this.life <= 0 ) {
             this.die();
-            console.log("Dead");
             return;
         }
         this.velocity.y += this.gravity * dt/1000;
