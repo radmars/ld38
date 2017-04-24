@@ -123,6 +123,7 @@ LD38.Game = class {
 			this.image("icon_up"),
 			this.image("icon_right"),
 			this.image("icon_left"),
+			this.image("icon_shift"),
 			this.image("bottom_hud_bg"),
 			this.image("level_1_bg"),
 			this.image("level_1_fg_1"),
