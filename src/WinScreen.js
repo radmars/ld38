@@ -11,14 +11,14 @@ LD38.WinScreen = me.ScreenObject.extend({
 		me.game.world.addChild( this.radmars );
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		this.subscription = me.event.subscribe( me.event.KEYDOWN, this.keyHandler.bind(this));
-		me.audio.playTrack( "ld38-title" );
+		me.audio.playTrack( "win" );
 
 	},
 
 	keyHandler: function (action, keyCode, edge) {
 		if(keyCode === me.input.KEY.ENTER && !this.finished) {
 			me.state.change(LD38.Game.States.Title);
-			me.audio.fade("ld38-title", 1.0, 0.0, 1000);
+			me.audio.fade("win", 1.0, 0.0, 1000);
 			this.finished = true;
 		}
 	},
