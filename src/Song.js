@@ -125,7 +125,7 @@
                         });
                     }
                     else {
-                        me.state.change(LD38.Game.States.GameOver);
+                        me.state.change(LD38.Game.States.Win);
                     }
 
 					this.finished = true;
