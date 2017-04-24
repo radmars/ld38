@@ -180,6 +180,7 @@
 		owie : function() {
 			this.hp--;
 			me.event.publish("hp change", [this.hp]);
+			me.audio.play("hit", false, null, 0.5);
 		}
 	});
 })();

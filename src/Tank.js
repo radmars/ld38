@@ -29,5 +29,6 @@ LD38.Tank = LD38.Note.extend({
 		me.game.viewport.shake(3,300,me.game.viewport.AXIS.BOTH);
 		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y+10, "explode_32");
 		me.game.world.addChild(explosion, 1000);
+		me.audio.play("tankexplode", false, null, 0.75);
 	},
 });

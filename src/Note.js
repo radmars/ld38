@@ -92,6 +92,7 @@ LD38.Note = me.Sprite.extend({
 		});
 		var shot = me.pool.pull('Bullet', {x:this.pos.x + this.shotOffsetX, y:this.pos.y + this.shotOffsetY, type:this.shotType});
 		me.game.world.addChild(shot);
+		me.audio.play("shoot");
 	},
 
 	removeIcon: function() {

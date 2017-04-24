@@ -25,5 +25,7 @@ LD38.Man = LD38.Note.extend({
 	hit: function() {
 		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, "bloodsplat");
 		me.game.world.addChild(explosion);
+		me.audio.play("dribble", false, null, 0.5);
+		me.audio.play("squish");
 	},
 });
