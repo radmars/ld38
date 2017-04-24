@@ -159,10 +159,17 @@
 				dist = Math.abs(( this.kaiju.pos.x - next.pos.x));
 			}
 
+			if( next.key == "right" && dist <= 60){
+				//its a dunk, time for predunk.
+				if(!this.kaiju.isCurrentAnimation("pre_dunk")) {
+					this.kaiju.predunk();
+				}
+			}
+
 			inputs.forEach((key) => {
 				if(me.input.isKeyPressed(key)) {
 					if(!next.isCorrectKey(key) ) {
-						if(dist <= 20){
+						if(dist <= 40){
 							this.addResult("miss", next.icon.pos.x, next.icon.pos.y);
 							this.removeNext();
 							this.owie();
@@ -175,6 +182,7 @@
 					}
 					else {
 						this.addResult("great", next.icon.pos.x, next.icon.pos.y);
+						this.kaiju.hit(key);
 						next.hit();
 						this.removeNext();
 						me.game.world.removeChild(next);
@@ -189,6 +197,7 @@
 			this.hp--;
 			me.event.publish("hp change", [this.hp]);
 			me.audio.play("hit", false, null, 0.5);
+			this.kaiju.miss();
 		}
 	});
 })();

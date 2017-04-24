@@ -2,16 +2,25 @@
 
 LD38.Kaiju = me.Sprite.extend({
 	init: function(song) {
-		this._super(me.Sprite, 'init', [0, 100, {
+		this._super(me.Sprite, 'init', [0, 77, {
 			image: "kaiju",
 			anchorPoint: new me.Vector2d(.85, .5),
 			framewidth: 136,
-			frameheight: 92,
+			frameheight: 136,
 		}]);
 		this.song = song;
 		this.addAnimation('idle', [0, 1, 2, 3, 4]);
-		this.addAnimation('dribble', [5,6,7,8,9]);
-		this.setCurrentAnimation('dribble');
+		this.addAnimation('dribble', [6,7,8]) //5,6,7,8],9;
+		this.addAnimation('hit', [10,4]);
+		this.addAnimation('pre_dunk', [11,11]);
+		this.addAnimation('dunk', [12,13,14,15,16]); //12,13,14,15,16
+		this.addAnimation('choopper', [18,19,20]);  //17,18,19,20,21
+
+		this.baseY = this.pos.y;
+		this.preDunkY = this.pos.y-25;
+		this.dunkTween = null;
+
+		this.setCurrentAnimation('idle');
 		this.trackingPos = this.pos.clone();
 		//this.icon = me.pool.pull("Icon", 1, 90, 'box');
 		//me.game.world.addChild(this.icon);
@@ -22,6 +31,61 @@ LD38.Kaiju = me.Sprite.extend({
 		});
 		hud.floating = true;
 		me.game.world.addChild(hud, 15);
+	},
+
+	predunk: function() {
+		if(this.isCurrentAnimation("hit") || this.isCurrentAnimation("pre_dunk")) {
+			return;
+		}
+		this.setCurrentAnimation('pre_dunk');
+		this.killTween();
+		this.dunkTween = new me.Tween(this.pos).to({y: this.preDunkY}, 500).onComplete(this.killTween);
+		this.dunkTween.start();
+	},
+
+	killTween: function() {
+		if(this.dunkTween != null) {
+			this.dunkTween.stop();
+		}
+	},
+
+	returnToBaseY: function() {
+		this.killTween();
+		this.pos.y = this.baseY;
+	},
+
+	hit: function(type) {
+		var anim = "dribble";
+
+		switch( type){
+			case "start": //man
+				anim = "dribble";
+				break;
+			case "down": //tank
+				anim = "dribble";
+				break;
+			case "up": //chopper
+				anim = "choopper";
+				break;
+			case "right": //hoop
+				anim = "dunk";
+				break;
+			default:
+				anim = "dribble";
+				break;
+		}
+
+		this.returnToBaseY();
+		this.setCurrentAnimation(anim, () => {
+			this.setCurrentAnimation('idle');
+		});
+	},
+
+	miss: function() {
+		this.returnToBaseY();
+		this.setCurrentAnimation('hit', () => {
+				this.setCurrentAnimation('idle');
+		});
 	},
 
 	update: function(dt) {
