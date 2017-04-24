@@ -5,6 +5,12 @@ LD38.Icon = me.Sprite.extend({
 		console.log(key);
 		this._super(me.Sprite, 'init', [x, 167, {image: `icon_${key}`}]);
 	},
+
+	update: function(dt) {
+		this._super(me.Sprite, 'update', [dt]);
+		return true;
+	},
+
 });
 
 LD38.Note = me.Sprite.extend({
@@ -14,19 +20,22 @@ LD38.Note = me.Sprite.extend({
 		this._super(me.Sprite, 'init', [settings.x, settings.y, settings.sprite]);
 		this.key = settings.key;
 		this.slackTime = 150;
-		if(this.key != 'start') {
-			this.icon = me.pool.pull('Icon', settings.x, this.key);
-			me.game.world.addChild(this.icon);
-		}else{
-			this.icon = me.pool.pull('Icon', settings.x, "shift");
-			me.game.world.addChild(this.icon, 1000);
-		}
 
 		this.shotTimerMax = this.shotTimer = 600 + Math.round(Math.random()*800);
 		this.shotType = "tank";
 		this.doesShoot = true;
 		this.shotOffsetX = 0;
 		this.shotOffsetY = 0;
+	},
+
+	addIcon: function() {
+		if(this.key != 'start') {
+			this.icon = me.pool.pull('Icon', this.pos.x, this.key);
+			me.game.world.addChild(this.icon);
+		}else{
+			this.icon = me.pool.pull('Icon', this.pos.x, "shift");
+			me.game.world.addChild(this.icon, 1000);
+		}
 	},
 
 	draw: function(renderer) {
@@ -84,7 +93,7 @@ LD38.Note = me.Sprite.extend({
 
 	removeIcon: function() {
 		if(this.icon) {
-			me.game.world.removeChild(this.icon);
+			//me.game.world.removeChild(this.icon);
 		}
 	},
 

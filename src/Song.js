@@ -81,11 +81,12 @@
 		addNote: function(tick, noteNum) {
 			var note;
 			if(noteNum != undefined) {
+				console.log("addNote");
 				var x    = (tick * this.pxPerTick) + (this.delay * this.pxPerMs);
 				var note = noteBuilders[noteNum](x);
 				note.setTiming(tick, (tick * this.msPerTick) + (this.delay), this.pxPerMs);
-
 				me.game.world.addChild(note);
+				//note.addIcon();
 			}
 			this.ticks[tick] = note;
 		},
