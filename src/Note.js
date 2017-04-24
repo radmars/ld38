@@ -105,5 +105,14 @@ LD38.Note = me.Sprite.extend({
 		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, "explode_32");
 		me.game.world.addChild(explosion, 1000);
 	},
+
+	randomDebris: function( num ) {
+
+		for( var i=0; i<num; i++){
+			var explosion = me.pool.pull('Particle', {x:this.pos.x, y:this.pos.y}, "debris_" + (Math.round(Math.random()*3)+1), new me.Vector2d(Math.random()*200-100,Math.random()*600-300));
+			me.game.world.addChild(explosion);
+		}
+	},
+
 });
 

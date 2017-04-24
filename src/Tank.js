@@ -30,5 +30,7 @@ LD38.Tank = LD38.Note.extend({
 		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y+10, "explode_32");
 		me.game.world.addChild(explosion, 1000);
 		me.audio.play("tankexplode", false, null, 0.75);
+
+		this.randomDebris(Math.round(1 + Math.random()*1));
 	},
 });

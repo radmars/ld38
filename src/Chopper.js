@@ -30,5 +30,6 @@ LD38.Chopper = LD38.Note.extend({
 		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, "explode_32");
 		me.game.world.addChild(explosion, 1000);
 		me.audio.play("heliexplode", false, null, 0.9);
+		this.randomDebris(Math.round(1 + Math.random()*1));
 	},
 });

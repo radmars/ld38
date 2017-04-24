@@ -18,17 +18,17 @@ LD38.Song.level1 = () => new LD38.Song({
 	//slow start
 		0  : 4,
 		4  : null,
-		8  : null,
+		8  : 2,
 		12 : null,
 
 		16 : 4,
 		20 : null,
-		24 : null,
+		24 : 2,
 		28 : null,
 
 		32 : 4,
 		36 : null,
-		40 : null,
+		40 : 2,
 		44 : null,
 
 		48 : 4,

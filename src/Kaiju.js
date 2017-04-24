@@ -15,6 +15,8 @@ LD38.Kaiju = me.Sprite.extend({
 		this.addAnimation('pre_dunk', [11,11]);
 		this.addAnimation('dunk', [12,13,14,15,16]); //12,13,14,15,16
 		this.addAnimation('choopper', [18,19,20]);  //17,18,19,20,21
+		this.addAnimation('stomp', [22,23,24,25]) //22,23,24,25,26
+		this.addAnimation('headbutt', [27,28,29,30,31]) //27,28,29,30,31;
 
 		this.baseY = this.pos.y;
 		this.preDunkY = this.pos.y-25;
@@ -62,13 +64,16 @@ LD38.Kaiju = me.Sprite.extend({
 				anim = "dribble";
 				break;
 			case "down": //tank
-				anim = "dribble";
+				anim = "stomp";
 				break;
 			case "up": //chopper
 				anim = "choopper";
 				break;
 			case "right": //hoop
 				anim = "dunk";
+				break;
+			case "left": //robot
+				anim = "headbutt";
 				break;
 			default:
 				anim = "dribble";

@@ -28,6 +28,7 @@ LD38.Robot = LD38.Note.extend({
 		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, "explode_big_64");
 		me.game.world.addChild(explosion);
 		me.audio.play("robotexplode", false, null, 0.75);
+		this.randomDebris(Math.round(3 + Math.random()*2));
 	},
 
 });

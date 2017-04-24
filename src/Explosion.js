@@ -60,11 +60,24 @@ LD38.Explosion = me.Sprite.extend({
 				this.addAnimation('dead', [6]);
 				break;
 		}
-
-
+		this.life = 1000;
 		this.setCurrentAnimation('idle', () => {
 		this.setCurrentAnimation('dead');
 			me.game.world.removeChild(this);
 		});
+	},
+
+	update: function(dt) {
+		this.life -=dt;
+		if(this.life <= 0 ) {
+			this.die();
+			return;
+		}
+		this._super(me.Sprite, 'update', [dt]);
+
+		return true;
+	},
+	die: function() {
+		me.game.world.removeChild(this);
 	},
 });

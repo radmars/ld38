@@ -166,6 +166,17 @@ LD38.Game = class {
 			this.image('firesmoke'),
 			this.image('beat_line'),
 
+			this.image('particle_dunk_1'),
+			this.image('particle_dunk_2'),
+			this.image('particle_dunk_3'),
+			this.image('particle_dunk_4'),
+			this.image('particle_dunk_5'),
+
+			this.image('debris_1'),
+			this.image('debris_2'),
+			this.image('debris_3'),
+			this.image('debris_4'),
+
 			this.image('great'),
 			this.image('miss'),
 
@@ -194,6 +205,7 @@ LD38.Game = class {
 			'Explosion',
 			'Icon',
 			'Bullet',
+			'Particle'
 		].forEach((type) => {
 			me.pool.register(type, LD38[type], true);
 		});
