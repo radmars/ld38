@@ -15,7 +15,7 @@ LD38.BGManager = me.Renderable.extend({
 			{
 				offset: new me.Vector2d(0, 0),
 				tiles: ['level_1_bg'],
-				speed: .001,
+				speed: .05,
 			},
 			{
 				offset: new me.Vector2d(0, 10),

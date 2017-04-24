@@ -9,6 +9,15 @@ LD38.Note = me.Sprite.extend({
 		this.slackTime = 150;
 	},
 
+	draw: function(renderer) {
+		this._super(me.Sprite, 'draw', [renderer]);
+
+		if(game.options.debug) {
+			renderer.setColor(new me.Color(255, 255, 0, .5));
+			renderer.fillRect(this.pos.x - 1, this.pos.y - 20, 2, 40);
+		}
+	},
+
 	setTiming: function(tick, perfectTime) {
 		this.tick = tick;
 		this.time = perfectTime;
