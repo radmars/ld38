@@ -24,7 +24,7 @@ LD38.PlayScreen = me.ScreenObject.extend({
 
 		me.game.viewport.follow(this.kaiju, me.game.viewport.AXIS.HORIZONTAL);
 		me.game.viewport.setDeadzone(0, 0);
-		me.game.world.addChild(new LD38.HPDisplay());
+		me.game.world.addChild(new LD38.HPDisplay(this.song.hp));
 	},
 
 	onDestroyEvent: function() {

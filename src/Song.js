@@ -33,6 +33,7 @@
 			this.ticks     = {};
 			this.started   = false;
 			this.delay     = settings.delay;
+			this.hp        = settings.hp;
 
 			Object.keys(noteMap).forEach((tick) => {
 				this.addNote(tick, noteMap[tick]);
@@ -118,6 +119,7 @@
 
 			if(next.isLate(this.progress)) {
 				this.removeNext();
+				this.owie();
 				console.log("late!");
 			}
 
@@ -125,9 +127,11 @@
 				if(me.input.isKeyPressed(key)) {
 					if(!next.isCorrectKey(key)) {
 						this.removeNext();
+						this.owie();
 						console.log("Wrong key!");
 					}
 					else if(next.isEarly(this.progress)) {
+						this.owie();
 						console.log("Early!");
 					}
 					else {
@@ -136,6 +140,11 @@
 					}
 				}
 			});
+		},
+
+		owie : function() {
+			this.hp--;
+			me.event.publish("hp change", [this.hp]);
 		}
 	});
 })();

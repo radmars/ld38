@@ -1,6 +1,7 @@
 "use strict";
 
 LD38.Song.drumtest = () => new LD38.Song({
+	hp      : 5,
 	bpm     : 115,
 	delay   : 1500,
 	duration: 40000,

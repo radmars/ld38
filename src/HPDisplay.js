@@ -1,7 +1,7 @@
 "use strict"
 
 LD38.HPDisplay = me.Renderable.extend({
-	init : function (settings) {
+	init : function (initial_hp) {
 		this.font = new me.Font('Times New Roman', 30, 'white');
 		var size = this.font.measureText(me.video.renderer, 'HP: 0');
 		this._super(
@@ -14,14 +14,15 @@ LD38.HPDisplay = me.Renderable.extend({
 		);
 		this.floating = true;
 		this.pos.z = 20;
-		this.hp = 9; // Placeholder - need to tie this to player HP.
-		this.HPSubscription = me.event.subscribe('hp change', (player) => (this.updateHP(player)));
+		this.hp = initial_hp;
+		this.HPSubscription = me.event.subscribe('hp change', (hp) => (this.updateHP(hp)));
 	},
 
-	updateHP: function(player) {
-		var old = this.hp;
-		this.hp = player.hp;
-		this.dirty = this.hp != old;
+	updateHP: function(hp) {
+		if (this.hp != hp) {
+			this.hp = hp;
+			this.dirty = 1;
+		}
 	},
 
 	onDeactivateEvent: function() {
