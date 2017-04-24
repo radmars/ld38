@@ -19,7 +19,7 @@ LD38.Note = me.Sprite.extend({
 			me.game.world.addChild(this.icon);
 		}else{
 			this.icon = me.pool.pull('Icon', settings.x, "shift");
-			me.game.world.addChild(this.icon);
+			me.game.world.addChild(this.icon, 1000);
 		}
 	},
 

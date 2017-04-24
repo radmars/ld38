@@ -4,7 +4,7 @@ LD38.Chopper = LD38.Note.extend({
 	init: function(x) {
 		this._super(LD38.Note, 'init', [{
 			x: x,
-			y: 40,
+			y: 70,
 			key: "up",
 			sprite: {
 				image: "chopper",

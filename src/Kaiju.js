@@ -18,9 +18,10 @@ LD38.Kaiju = me.Sprite.extend({
 		var hud = new me.Sprite(160, 167, {
 			image: 'bottom_hud_bg',
 		});
-		hud.pos.z = -10;
+		//hud.pos.z = -10;
 		hud.floating = true;
-		me.game.world.addChild(hud);
+		me.game.world.addChild(hud, 2);
+		me.game.world.autoSort = true;
 	},
 
 	update: function(dt) {

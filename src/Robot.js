@@ -4,7 +4,7 @@ LD38.Robot = LD38.Note.extend({
 	init: function(x) {
 		this._super(LD38.Note, 'init', [{
 			x: x,
-			y: 110,
+			y: 105,
 			key: "left",
 			sprite: {
 				image: "robot",
