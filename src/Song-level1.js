@@ -16,17 +16,66 @@ LD38.Song.level1 = () => new LD38.Song({
 		//3 = bot
 		
 	//slow start
-		
+		0  : 4,
+		4  : null,
+		8  : null,
+		12 : null,
+
+		16 : 4,
+		20 : null,
+		24 : null,
+		28 : null,
+
+		32 : 4,
+		36 : null,
+		40 : null,
+		44 : null,
+
+		48 : 4,
+		52 : null,
+		56 : null,
+		60 : null,
+
 	//vocals
 		64 : 1,
+		68 : null,
+		72 : 4,
+		76 : null,
+		
 		80 : 1,
+		84 : null,
+		88 : 4,
+		92 : null,
+
 		96 : 1,
+		100 : null,
+		104 : 4,
+		108 : null,
+
 		112 : 1,
+		116 : null,
+		120 : 4,
+		124 : null,
 		
 		128 : 0,
+		132 : null,
+		136 : 4,
+		140 : null,
+
 		144 : 0,
+		148 : null,
+		152 : 4,
+		156 : null,
+
 		160 : 1,
+		164 : null,
+		168 : 4,
+		172 : null,
+
 		176 : 1,
+		180 : null,
+		184 : 4,
+		188 : null,
 		
 	//drums
 		192 : 3,
@@ -426,6 +475,21 @@ LD38.Song.level1 = () => new LD38.Song({
 		1716 : null,
 		1720 : null,
 		1724 : null,
+		
+		1728 : null,
+		1732 : null,
+		1736 : null,
+		1740 : null,
+		
+		1744 : null,
+		1748 : null,
+		1752 : null,
+		1756 : null,
+		
+		1760 : null,
+		1764 : null,
+		1768 : null,
+		1772 : null,
 	
 	},
 });
