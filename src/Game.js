@@ -70,7 +70,7 @@ LD38.Game = class {
 			},
 			start: {
 				keys: [me.input.KEY.ENTER, me.input.KEY.X],
-				pad:  [me.input.GAMEPAD.BUTTONS.DOWN],
+				pad:  [me.input.GAMEPAD.BUTTONS.FACE_3],
 			},
 		};
 
