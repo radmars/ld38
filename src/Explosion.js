@@ -33,6 +33,7 @@ LD38.Explosion = me.Sprite.extend({
 			framewidth: sizeX,
 			frameheight: sizeY,
 		}]);
+        this.alwaysUpdate = true;
 
 		switch( t ) {
 			case "firesmoke":

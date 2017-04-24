@@ -2,7 +2,6 @@
 
 LD38.Bullet = me.Sprite.extend({
     init: function(settings) {
-
         var img = "bullet_tank";
         var vel = new me.Vector2d(-75,0);
         switch( settings.type ){
@@ -33,6 +32,7 @@ LD38.Bullet = me.Sprite.extend({
         this._super(me.Sprite, 'init', [settings.x, settings.y, sprite]);
         this.velocity = vel;
         this.life = 400 + Math.random()*400;
+        this.alwaysUpdate = true;
     },
 
     draw: function(renderer) {

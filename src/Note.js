@@ -2,7 +2,6 @@
 
 LD38.Icon = me.Sprite.extend({
 	init: function(x, y, key) {
-		console.log(key);
 		this._super(me.Sprite, 'init', [x, y, {image: `icon_${key}`}]);
 	},
 
@@ -28,6 +27,7 @@ LD38.Note = me.Sprite.extend({
 		this.shotOffsetY = 0;
 		this.active = false;
 		this.iconActive = false;
+        this.alwaysUpdate = true;
 	},
 
 	addIcon: function() {
@@ -73,6 +73,9 @@ LD38.Note = me.Sprite.extend({
 
 	update: function(dt) {
 		this._super(me.Sprite, 'update', [dt]);
+        if(me.game.viewport.left > this.pos.x) {
+            me.game.world.removeChild(this);
+        }
 
 		if(this.doesShoot){
 			this.shotTimer -= dt;

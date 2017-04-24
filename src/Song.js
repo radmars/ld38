@@ -85,13 +85,11 @@
 			var note = this.getNext();
 			delete this.ticks[this.tickList.shift()];
 			note.removeIcon();
-			console.log(`Next tick is ${this.tickList[0] || "undefined"}`);
 		},
 
 		addNote: function(tick, noteNum) {
 			var note;
 			if(noteNum != undefined) {
-				console.log("addNote");
 				var x    = (tick * this.pxPerTick) + (this.delay * this.pxPerMs);
 				var note = noteBuilders[noteNum](x);
 				note.setTiming(tick, (tick * this.msPerTick) + (this.delay), this.pxPerMs);
@@ -120,10 +118,16 @@
 			if(this.progress > this.duration) {
 				if(!this.finished) {
 					me.audio.fade(this.file, 1, 0, 1000);
-					me.game.viewport.fadeIn('#000', 1000, () => {
-						me.state.current().reset();
-						me.game.viewport.fadeOut('#000', 500);
-					});
+                    if(this.next) {
+                        me.game.viewport.fadeIn('#000', 1000, () => {
+                            me.state.current().reset();
+                            me.game.viewport.fadeOut('#000', 500);
+                        });
+                    }
+                    else {
+                        me.state.change(LD38.Game.States.GameOver);
+                    }
+
 					this.finished = true;
 				}
 				return true;
@@ -168,7 +172,6 @@
 				this.addResult("miss", next.icon.pos.x, next.icon.pos.y);
 				this.removeNext();
 				this.owie();
-				console.log("late!");
 			}
 
 			var dist = 0;
@@ -191,11 +194,9 @@
 							this.removeNext();
 							this.owie();
 						}
-						console.log("Wrong key!");
 					}
 					else if(next.isEarly(this.progress)) {
 						this.owie();
-						console.log("Early!");
 					}
 					else {
 						this.addResult("great", next.icon.pos.x, next.icon.pos.y);

@@ -3,7 +3,6 @@
 LD38.PlayScreen = me.ScreenObject.extend({
 	init: function() {
 		this._super(me.ScreenObject, 'init', arguments);
-		this.nextSong = window.game.options.song || 'level1';
 	},
 
 	add: function(item, container) {
@@ -17,6 +16,7 @@ LD38.PlayScreen = me.ScreenObject.extend({
 		me.audio.stopTrack();
 		this.entities = [];
 
+		this.nextSong = this.nextSong || window.game.options.song || 'level1';
 		this.song = this.add(LD38.Song[this.nextSong]());
 		this.nextSong = this.song.next;
 		this.kaiju = me.pool.pull('Kaiju', this.song);
