@@ -235,8 +235,6 @@ LD38.Game.States = {
 	Intro:    1 + me.state.USER,
 	Play:     2 + me.state.USER,
 	Title:    3 + me.state.USER,
-	Controls: 4 + me.state.USER,
-	Credits:  5 + me.state.USER,
 	Win:      6 + me.state.USER,
 	GameOver: 7 + me.state.USER,
 }
