@@ -25,7 +25,6 @@ LD38.IntroScreen = me.ScreenObject.extend({
 	},
 
 	onDestroyEvent: function() {
-		me.input.unbindKey(me.input.KEY.ENTER);
 		me.audio.stopTrack();
 		me.event.unsubscribe(this.subscription);
 	}

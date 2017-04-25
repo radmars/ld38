@@ -11,7 +11,7 @@ LD38.TitleScreen = me.ScreenObject.extend({
 		me.game.world.addChild( this.radmars );
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		this.subscription = me.event.subscribe( me.event.KEYDOWN, this.keyHandler.bind(this));
-		me.audio.playTrack( "ld38-title" );
+		me.audio.play( "ld38-title" );
 		this.finished = false;
 	},
 
@@ -24,7 +24,6 @@ LD38.TitleScreen = me.ScreenObject.extend({
 	},
 
 	onDestroyEvent: function() {
-		me.input.unbindKey(me.input.KEY.ENTER);
 		me.event.unsubscribe(this.subscription);
 	}
 });
