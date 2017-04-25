@@ -4,7 +4,7 @@ LD38.Song.level1 = () => new LD38.Song({
 	hp      : 9,
 	bpm     : 115,
 	delay   : 1500,
-	duration: 233000,
+	duration: 230000,
 	file    : "ld38-level1",
 	next    : 'level2',
 	spacing : 15,
@@ -481,16 +481,6 @@ LD38.Song.level1 = () => new LD38.Song({
 		1732 : null,
 		1736 : null,
 		1740 : null,
-		
-		1744 : null,
-		1748 : null,
-		1752 : null,
-		1756 : null,
-		
-		1760 : null,
-		1764 : null,
-		1768 : null,
-		1772 : null,
 	
 	},
 });
