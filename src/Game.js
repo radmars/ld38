@@ -129,6 +129,8 @@ LD38.Game = class {
 			this.audio("squish"),
 			this.audio("step"),
 			this.audio("tankexplode"),
+			this.audio("jump"),
+			this.audio("death"),
 
 			this.image("title"),
 			this.image("game_over"),
