@@ -133,6 +133,7 @@ LD38.Game = class {
 			this.audio("death"),
 
 			this.image("title"),
+			this.image("win"),
 			this.image("game_over"),
 			this.image("hit_enter"),
 			this.image("icon_box"),
