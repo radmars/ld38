@@ -23,7 +23,7 @@ LD38.Hoop = LD38.Note.extend({
 		me.game.viewport.shake(6,500,me.game.viewport.AXIS.BOTH);
 		var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y-60, "explode_big_64");
 		me.game.world.addChild(explosion, 1000);
-		me.audio.play("dunk", false, null, 0.75);
+		me.audio.play("dunk", false, null, 0.9);
 
 		var explosion = me.pool.pull('Particle', {x:this.pos.x-15, y:this.pos.y-50}, "particle_dunk_1", new me.Vector2d(-60,-4));
 		me.game.world.addChild(explosion);

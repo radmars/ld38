@@ -117,6 +117,8 @@ LD38.Game = class {
 			this.audio("ld38-level2"),
 			this.audio("ld38-level3"),
 			this.audio("ld38-title"),
+			this.audio("gameover"),
+			this.audio("win"),
 
 			this.audio("dribble"),
 			this.audio("dunk"),
@@ -127,6 +129,8 @@ LD38.Game = class {
 			this.audio("squish"),
 			this.audio("step"),
 			this.audio("tankexplode"),
+			this.audio("jump"),
+			this.audio("death"),
 
 			this.image("title"),
 			this.image("game_over"),

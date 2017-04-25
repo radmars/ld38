@@ -47,6 +47,7 @@ LD38.Kaiju = me.Sprite.extend({
 		this.killTween();
 		this.dunkTween = new me.Tween(this.pos).to({y: this.preDunkY}, 500).onComplete(this.killTween);
 		this.dunkTween.start();
+		me.audio.play("jump");
 	},
 
 	killTween: function() {
@@ -110,6 +111,7 @@ LD38.Kaiju = me.Sprite.extend({
 			this.setCurrentAnimation('die_idle');
 		});
 		this.hud.pos.x = -1000;
+		me.audio.play("death");
 	},
 
 	update: function(dt) {

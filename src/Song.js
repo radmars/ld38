@@ -77,7 +77,6 @@
 		},
 
 		onDie: function() {
-			// TODO: death sound effect.
 			// TODO: stop music?
 			this.kaiju.die();
 		},
