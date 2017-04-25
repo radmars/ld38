@@ -22,7 +22,7 @@ LD38.PlayScreen = me.ScreenObject.extend({
 		this.kaiju = me.pool.pull('Kaiju', this.song);
 		this.song.kaiju = this.kaiju;
 
-		this.bg = this.add(new LD38.BGManager(this.kaiju, "level_1"));
+		this.bg = this.add(new LD38.BGManager(this.kaiju, this.song.background));
 
 		//this.add(this.kaiju);
 		//add  kaiju to world so he sorts correctly.
