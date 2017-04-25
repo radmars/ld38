@@ -34,6 +34,7 @@ LD38.PlayScreen = me.ScreenObject.extend({
 	},
 
 	onDestroyEvent: function() {
+		this.nextSong = window.game.options.song || 'level1';
 		this.entities.forEach((item) => {
 			if(item.ancestor) {
 				item.ancestor.removeChild(item);
