@@ -12,7 +12,7 @@ LD38.WinScreen = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		this.subscription = me.event.subscribe( me.event.KEYDOWN, this.keyHandler.bind(this));
 		me.audio.playTrack( "win" );
-
+		this.finished = false;
 	},
 
 	keyHandler: function (action, keyCode, edge) {

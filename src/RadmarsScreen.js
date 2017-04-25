@@ -13,6 +13,7 @@ LD38.IntroScreen = me.ScreenObject.extend({
 		this.subscription = me.event.subscribe( me.event.KEYDOWN, this.keyHandler.bind(this));
 
 		me.audio.play( "radmarslogo" );
+		this.finished = false;
 	},
 
 	keyHandler: function (action, keyCode, edge) {
