@@ -36,6 +36,7 @@
 			this.hp  = this.hpMax = 20;//settings.hp;
 			this.alive 		= true;
 			this.deathTimer = 3000;
+			this.background = settings.background;
 
 			this.kaiju = null;
 

@@ -8,6 +8,7 @@ LD38.Song.level2 = () => new LD38.Song({
 	file    : "ld38-level2",
 	next    : 'level3',
 	spacing : 15,
+	background:"level_2",
 	notes   : {
 		
 	//0 = chopper

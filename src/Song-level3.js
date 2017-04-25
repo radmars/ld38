@@ -7,6 +7,7 @@ LD38.Song.level3 = () => new LD38.Song({
     duration: 145000,
     file    : "ld38-level3",
     spacing : 15,
+    background:"level_3",
     notes   : {
         0 : 1,
         3 : 1,
