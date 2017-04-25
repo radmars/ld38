@@ -13,7 +13,7 @@ LD38.Particle = me.Sprite.extend({
         this.life = 500 + Math.random()*500;
         this.gravity = 500;
         this.groundY = 140;
-        this.smokeTimer = 400;
+        this.smokeTimer = 200;
         this.alwaysUpdate = true;
     },
 
@@ -25,7 +25,6 @@ LD38.Particle = me.Sprite.extend({
         this.life -=dt;
         if(this.life <= 0 ) {
             this.die();
-            console.log("Dead");
             return;
         }
         this.velocity.y += this.gravity * dt/1000;
@@ -43,7 +42,7 @@ LD38.Particle = me.Sprite.extend({
 
         this.smokeTimer-=dt;
         if(this.smokeTimer <= 0){
-            this.smokeTimer = 400;
+            this.smokeTimer = 200;
             var explosion = me.pool.pull('Explosion', this.pos.x, this.pos.y, "firesmoke");
             me.game.world.addChild(explosion);
         }

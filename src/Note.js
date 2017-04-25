@@ -89,7 +89,9 @@ LD38.Note = me.Sprite.extend({
 	},
 
 	shoot: function() {
-
+		if(! this.inViewport) {
+			return;
+		}
 		this.setCurrentAnimation('shoot', () => {
 			this.setCurrentAnimation('idle');
 		});

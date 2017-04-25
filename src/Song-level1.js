@@ -6,8 +6,13 @@ LD38.Song.level1 = () => new LD38.Song({
 	delay   : 1500,
 	duration: 233000,
 	file    : "ld38-level1",
+<<<<<<< HEAD
 	next    : 'ld38-level2',
+=======
+	next    : 'level2',
+>>>>>>> origin/master
 	spacing : 15,
+	background:"level_1",
 	notes   : {
 		
 		//0 = chopper

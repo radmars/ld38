@@ -33,9 +33,10 @@
 			this.ticks     = {};
 			this.started   = false;
 			this.delay     = settings.delay;
-			this.hp        = 10;//settings.hp;
+			this.hp  = this.hpMax = 20;//settings.hp;
 			this.alive 		= true;
 			this.deathTimer = 3000;
+			this.background = settings.background;
 
 			this.kaiju = null;
 
@@ -76,7 +77,6 @@
 		},
 
 		onDie: function() {
-			// TODO: death sound effect.
 			// TODO: stop music?
 			this.kaiju.die();
 		},
@@ -137,9 +137,11 @@
 				this.progress += dt;
 			}else{
 				this.deathTimer -=dt;
-				if(this.deathTimer <=0){
+				if(this.deathTimer <=0 && !this.finished){
 					//change to game over?
+					me.audio.fade(this.file, 1, 0, 1000);
 					me.state.change(LD38.Game.States.GameOver);
+                    this.finished = true;
 					return true;
 				}
 			}
@@ -204,6 +206,11 @@
 						next.hit();
 						this.removeNext();
 						me.game.world.removeChild(next);
+						this.hp += 0.25;
+						if(this.hp > this.hpMax){
+							this.hp = this.hpMax;
+						}
+						me.event.publish("hp change", [this.hp]);
 					}
 				}
 			});
