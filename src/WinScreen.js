@@ -9,7 +9,6 @@ LD38.WinScreen = me.ScreenObject.extend({
 	onResetEvent: function() {
 		this.radmars = new LD38.WinRenderable();
 		me.game.world.addChild( this.radmars );
-		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		this.subscription = me.event.subscribe( me.event.KEYDOWN, this.keyHandler.bind(this));
 		me.audio.play( "win" );
 		this.finished = false;
