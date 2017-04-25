@@ -203,13 +203,21 @@
 					else {
 						this.addResult("great", next.icon.pos.x, next.icon.pos.y);
 						this.kaiju.hit(key);
-						next.hit();
-						this.removeNext();
-						me.game.world.removeChild(next);
-						this.hp += 0.25;
+
+						if( next.key == "right" ){
+							this.hp += 2.5;
+						}
+						else {
+							this.hp += 0.25;
+						}
+
 						if(this.hp > this.hpMax){
 							this.hp = this.hpMax;
 						}
+
+						next.hit();
+						this.removeNext();
+						me.game.world.removeChild(next);
 						me.event.publish("hp change", [this.hp]);
 					}
 				}
