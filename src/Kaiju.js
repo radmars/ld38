@@ -17,8 +17,8 @@ LD38.Kaiju = me.Sprite.extend({
 		this.addAnimation('choopper', [18,19,20]);  //17,18,19,20,21
 		this.addAnimation('stomp', [22,23,24,25]) //22,23,24,25,26
 		this.addAnimation('headbutt', [27,28,29,30,31]) //27,28,29,30,31;
-		this.addAnimation('die', [10,4,10,4,10,4,10,4,10,4]);
-		this.addAnimation('die_idle', [10]);
+		this.addAnimation('die', [32,33,34,35,36,37,38,39,40,41,42,43,44,45]);
+		this.addAnimation('die_idle', [45,45]);
 
 		this.baseY = this.pos.y;
 		this.preDunkY = this.pos.y-25;
@@ -112,6 +112,7 @@ LD38.Kaiju = me.Sprite.extend({
 		});
 		this.hud.pos.x = -1000;
 		me.audio.play("death");
+		me.game.viewport.shake(5,750,me.game.viewport.AXIS.BOTH);
 	},
 
 	update: function(dt) {
