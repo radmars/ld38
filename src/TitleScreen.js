@@ -9,7 +9,6 @@ LD38.TitleScreen = me.ScreenObject.extend({
 	onResetEvent: function() {
 		this.radmars = new LD38.TitleRenderable();
 		me.game.world.addChild( this.radmars );
-		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		this.subscription = me.event.subscribe( me.event.KEYDOWN, this.keyHandler.bind(this));
 		me.audio.play( "ld38-title" );
 		this.finished = false;

@@ -67,8 +67,6 @@ LD38.RadmarsRenderable = me.Renderable.extend({
 		this.text_mars     = new me.Sprite(cx + 0, cy + offset.text.y, {image: "intro_mars"});
 		this.text_radmars1 = new me.Sprite(cx - 0, cy + offset.text.y, {image: "intro_radmars1"});
 		this.text_radmars2 = new me.Sprite(cx - 0, cy + offset.text.y, {image: "intro_radmars2"});
-
-		me.input.bindKey( me.input.KEY.ENTER, "enter", true );
 	},
 
 	getMarsText: function() {
