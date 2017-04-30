@@ -7,8 +7,10 @@ LD38.GameOverScreen = me.ScreenObject.extend({
 	},
 
 	onResetEvent: function() {
-		this.radmars = new LD38.GameOverRenderable();
+		this.radmars = new LD38.BGRenderable("game_over");
 		me.game.world.addChild( this.radmars );
+		this.hitenter = new LD38.HitEnter();
+		me.game.world.addChild(this.hitenter);
 		this.subscription = me.event.subscribe( me.event.KEYDOWN, this.keyHandler.bind(this));
 		me.audio.play( "gameover" );
 		this.finished = false;
@@ -24,36 +26,5 @@ LD38.GameOverScreen = me.ScreenObject.extend({
 
 	onDestroyEvent: function() {
 		me.event.unsubscribe(this.subscription);
-	}
-});
-
-LD38.GameOverRenderable = me.Renderable.extend({
-	init: function() {
-		this._super(me.Renderable, "init", [0, 0, me.video.renderer.getWidth(), me.video.renderer.getHeight()] );
-		this.counter = 0;
-		this.floating = true;
-
-		// center of hit enter 12 px from bottom
-		var cx = this.width / 2;
-		var cy = this.height / 2;
-		this.bg = new me.Sprite(0, 0, { image: "game_over" });
-		this.bg.pos.x = cx;
-		this.bg.pos.y = cy;
-		this.alpha = 0;
-		this.hitEnter = new me.Sprite(cx, this.height - 12, {image: "hit_enter"});
-	},
-
-	draw: function(context) {
-		this.bg.draw(context);
-		this.hitEnter.draw(context);
-	},
-
-	update: function( dt ) {
-		this.counter += dt;
-		if ( this.counter > 500 ) {
-			this.hitEnter.alpha = 1 - this.hitEnter.alpha;
-			this.counter = 0;
-		}
-		return true;
 	}
 });

@@ -156,6 +156,11 @@ LD38.Game = class {
 			this.image("level_3_fg_1"),
 			this.image("level_3_fg_2"),
 			this.image("level_3_mg"),
+			this.image("level_select_bg"),
+			this.image("level_select_level_1"),
+			this.image("level_select_level_2"),
+			this.image("level_select_level_3"),
+			this.image("level_select_selector"),
 			this.image("chopper"),
 			this.image("comp"),
 			this.image("ground"),
@@ -238,6 +243,7 @@ LD38.Game.States = {
 	Title:    3 + me.state.USER,
 	Win:      6 + me.state.USER,
 	GameOver: 7 + me.state.USER,
+	Level:    8 + me.state.USER,
 }
 
 var game = new LD38.Game();

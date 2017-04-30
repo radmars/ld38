@@ -7,7 +7,9 @@ LD38.WinScreen = me.ScreenObject.extend({
 	},
 
 	onResetEvent: function() {
-		this.radmars = new LD38.WinRenderable();
+		this.radmars = new LD38.BGRenderable("win");
+		this.hitenter = new LD38.HitEnter();
+		me.game.world.addChild( this.hitenter );
 		me.game.world.addChild( this.radmars );
 		this.subscription = me.event.subscribe( me.event.KEYDOWN, this.keyHandler.bind(this));
 		me.audio.play( "win" );
@@ -27,33 +29,35 @@ LD38.WinScreen = me.ScreenObject.extend({
 	}
 });
 
-LD38.WinRenderable = me.Renderable.extend({
+LD38.HitEnter = me.Sprite.extend({
 	init: function() {
-		this._super(me.Renderable, "init", [0, 0, me.video.renderer.getWidth(), me.video.renderer.getHeight()] );
+		this._super(me.Sprite, "init", [
+			me.video.renderer.getWidth() / 2,
+			me.video.renderer.getHeight() - 12,
+			{
+				image: "hit_enter",
+			}
+		]);
 		this.counter = 0;
-		this.floating = true;
-
-		// center of hit enter 12 px from bottom
-		var cx = this.width / 2;
-		var cy = this.height / 2;
-		this.bg = new me.Sprite(0, 0, { image: "win" });
-		this.bg.pos.x = cx;
-		this.bg.pos.y = cy;
-		this.alpha = 0;
-		this.hitEnter = new me.Sprite(cx, this.height - 12, {image: "hit_enter"});
 	},
-
-	draw: function(context) {
-		this.bg.draw(context);
-		this.hitEnter.draw(context);
-	},
-
-	update: function( dt ) {
+	update: function(dt) {
 		this.counter += dt;
 		if ( this.counter > 500 ) {
-			this.hitEnter.alpha = 1 - this.hitEnter.alpha;
+			this.alpha = 1 - this.alpha;
 			this.counter = 0;
 		}
 		return true;
-	}
+	},
+});
+
+LD38.BGRenderable = me.Sprite.extend({
+	init: function(bg) {
+		this._super(me.Sprite, "init", [
+			me.video.renderer.getWidth() / 2,
+			me.video.renderer.getHeight() / 2,
+			{
+				image: bg,
+			},
+		]);
+	},
 });

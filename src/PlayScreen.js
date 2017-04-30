@@ -16,7 +16,11 @@ LD38.PlayScreen = me.ScreenObject.extend({
 		me.audio.stopTrack();
 		this.entities = [];
 
-		this.nextSong = this.nextSong || window.game.options.song || 'level1';
+		this.nextSong = window.game.selectedLevel ||
+			this.nextSong || window.game.options.song || 'level1';
+
+		window.game.selectedLevel = null;
+
 		this.song = this.add(LD38.Song[this.nextSong]());
 		this.nextSong = this.song.next;
 		this.kaiju = me.pool.pull('Kaiju', this.song);
